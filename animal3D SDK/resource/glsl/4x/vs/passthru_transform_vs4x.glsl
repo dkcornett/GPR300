@@ -29,15 +29,20 @@
 //		(hint: correct name is used in codebase)
 //	-> transform input position by MVP matrix, store as output
 
-layout (location = 0) in vec4 aPosition;
+layout (location = 0) in vec4 aPosition;		//ATTRIBUTE position
+//attribute vec4 aPosition; // :(
 
-flat out int vVertexID;
+uniform mat4 uMVP; //adding in model-view-projection matrix
+
+flat out int vVertexID;		//VARYING vertexID
 flat out int vInstanceID;
+//varying int vInstanceID; //:(
 
 void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
-	gl_Position = aPosition;
+	//gl_Position = aPosition;
+	gl_position = uMVP * aPosition; //RIGHT TO LEFT FOR ALL MULTIPLICATION IN GLSL
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;

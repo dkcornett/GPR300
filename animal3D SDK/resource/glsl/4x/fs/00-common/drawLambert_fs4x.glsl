@@ -37,8 +37,26 @@
 
 layout (location = 0) out vec4 rtFragColor;
 
+in vec4 vPosition;
+in Vec4 vNormal;
+
+uniform vec4 uLightPos;	//camera space
+uniform vec4 
+
+
+
 void main()
 {
 	// DUMMY OUTPUT: all fragments are OPAQUE LIME
-	rtFragColor = vec4(0.5, 1.0, 0.0, 1.0);
+	//rtFragColor = vec4(0.5, 1.0, 0.0, 1.0);
+
+	//diffuse coefficient:
+	// dotproduct of normal and light vector
+	vec4 N = normalize(vNormal);
+	vec4 L = normalize(uLightPos - vPosition);
+	//or divide by magnitude
+	float kd = dot(N,L);
+
+	//DEBUGGING
+	reFragColor = kd * vec4(kd,kd,kd,1.0);
 }

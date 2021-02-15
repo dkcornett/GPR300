@@ -237,6 +237,7 @@ void a3postproc_render(a3_DemoState const* demoState, a3_DemoMode1_PostProc cons
 	// framebuffer target for each pass
 	const a3_Framebuffer* writeFBO[postproc_renderPass_max] = {
 		demoState->fbo_d32,
+		demoState->fbo_c16x4_d24s8,
 		//...
 	};
 
@@ -359,6 +360,11 @@ void a3postproc_render(a3_DemoState const* demoState, a3_DemoMode1_PostProc cons
 	// select pipeline algorithm
 	glDisable(GL_BLEND);
 
+	// ****DONE:
+//	-> uncomment shadow map bind
+	a3framebufferBindDepthTexture(writeFBO[postproc_renderPassShadow], a3tex_unit06); //demoState->fbo_d32
+
+
 	// forward shading algorithms
 	for (currentSceneObject = demoMode->obj_sphere, endSceneObject = demoMode->obj_ground;
 		currentSceneObject <= endSceneObject; ++currentSceneObject)
@@ -368,9 +374,6 @@ void a3postproc_render(a3_DemoState const* demoState, a3_DemoMode1_PostProc cons
 		// activate texture maps
 		a3textureActivate(texture_dm[j], a3tex_unit00);
 		a3textureActivate(texture_sm[j], a3tex_unit01);
-		// ****DONE:
-		//	-> uncomment shadow map bind
-		a3framebufferBindDepthTexture(writeFBO[postproc_renderPassShadow], a3tex_unit06); //demoState->fbo_d32
 
 		// send other data
 		a3shaderUniformSendInt(a3unif_single, currentDemoProgram->uIndex, 1, &j);

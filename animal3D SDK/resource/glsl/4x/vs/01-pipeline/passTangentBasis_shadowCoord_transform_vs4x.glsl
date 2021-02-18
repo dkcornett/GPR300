@@ -24,7 +24,7 @@
 
 #version 450
 
-// ****TO-DO:
+// ****TO-DO: WIP
 // 1) core transformation and lighting setup:
 //	-> declare data structures for projector and model matrix stacks
 //		(hint: copy and slightly modify demo object descriptors)
@@ -49,10 +49,48 @@ flat out int vInstanceID;
 
 uniform int uIndex;
 
+//	ubo_transform:
+//	->projector stack for camera and light
+// ->model stack for all objects
+
+struct sProjectorMatrixStack		//get definition for this stack in the code!
+{
+	mat4 projectionMat;					// projection matrix (viewer -> clip)
+	mat4 projectionMatInverse;			// projection inverse matrix (clip -> viewer)
+	mat4 projectionBiasMat;				// projection-bias matrix (viewer -> biased clip)
+	mat4 projectionBiasMatInverse;		// projection-bias inverse matrix (biased clip -> viewer)
+	mat4 viewProjectionMat;				// view-projection matrix (world -> clip)
+	mat4 viewProjectionMatInverse;		// view-projection inverse matrix (clip -> world)
+	mat4 viewProjectionBiasMat;			// view projection-bias matrix (world -> biased clip)
+	mat4 viewProjectionBiasMatInverse;	// view-projection-bias inverse matrix (biased clip -> world)
+};
+
+struct sModelMatrixStack
+{
+	mat4 modelMat;
+	mat4 modelMatInverse;
+	mat4 modelViewMat;
+	mat4 modelViewMatInverse;
+	mat4 modelViewMatInverseTranspose;
+	mat4 modelViewProjectionMat;
+	mat4 atlasMat;
+};
+
+//struct sUBO
+uniform ubTransformStack
+{
+	//sProjectorMatrixStack uProjectorMatrixStack[2];
+	sProjectorMatrixStack uCameraMatrixStack, uLightMatrixStack;
+	sModelMatrixStack uModelMatrixStack[16];
+};
+
 void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
-	gl_Position = aPosition;
+	//gl_Position = aPosition;
+	gl_Position = uCameraMatrixStack.projectionMat *
+		uModelMatrixStack[uIndex].modelViewMat *
+		aPosition;
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;

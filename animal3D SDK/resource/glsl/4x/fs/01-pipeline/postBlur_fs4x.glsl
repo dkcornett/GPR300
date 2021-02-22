@@ -30,10 +30,23 @@
 //	-> declare Gaussian blur function that samples along one axis
 //		(hint: the efficiency of this is described in class)
 
+in Vec2 vTexcoord;
+uniform sample2D uTex_dm;
+uniform vec2 uAxis;
+
 layout (location = 0) out vec4 rtFragColor;
 
 void main()
 {
 	// DUMMY OUTPUT: all fragments are OPAQUE AQUA
-	rtFragColor = vec4(0.0, 1.0, 0.5, 1.0);
+	//rtFragColor = vec4(0.0, 1.0, 0.5, 1.0);
+
+	rtFragColor = texture(uTex_dm, vTexcoord);
+
+	// temp vec2 current coord, 
+	// -> offset coord???
+	//		vec2 for offset = displacement betweem 2 pixels
+	//			e.g. horizontal : vec2(1 / image width, 0);
+	//				 vertical:    ve2(0, 1/ img height);
+	// color accumulates
 }

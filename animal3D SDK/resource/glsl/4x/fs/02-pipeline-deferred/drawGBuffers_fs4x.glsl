@@ -32,10 +32,20 @@
 //	-> calculate final normal
 //	-> output pertinent surface data
 
-layout (location = 0) out vec4 rtFragColor;
+in vec4 vPosition;
+in vec4 vNormal;
+in vec4 vTexCoord;
+
+//layout (location = 0) out vec4 rtFragColor;
+layout (location = 0) out vec4 rtTexCoord;
+layout (location = 1) out vec4 rtNormal;
+layout (location = 3) out vec4 rtPosition;
 
 void main()
 {
 	// DUMMY OUTPUT: all fragments are OPAQUE MAGENTA
-	rtFragColor = vec4(1.0, 0.0, 1.0, 1.0);
+	//rtFragColor = vec4(1.0, 0.0, 1.0, 1.0
+	rtTexCoord = vTexCoord;
+	rtNormal = vec4(normalize(vNormal.xyz) * 0.5f + 0.5f, 1.0f);
+//	rtPosition = vPosition;
 }

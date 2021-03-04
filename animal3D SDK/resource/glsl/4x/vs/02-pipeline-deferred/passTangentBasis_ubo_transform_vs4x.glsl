@@ -36,6 +36,8 @@
 //		(hint: texcoord transformed to atlas coordinates in a similar fashion)
 
 layout (location = 0) in vec4 aPosition;
+// layout (location = 2) in vec3 vNormal;
+// layout (location = 8) in vec4 vTexCoord;
 
 struct sModelMatrixStack
 {
@@ -60,7 +62,16 @@ flat out int vInstanceID;
 void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
-	gl_Position = aPosition;
+	//gl_Position = aPosition;
+	gl_position = uModelMatrixStack[uIndex].modelViewProjectionMat;
+
+	//??? = uModelMatrixStack[uIndex].modelViewMat * aPosition;
+
+	vPosition = uModelMatrixStack[uIndex].modelViewMat * aPosition;
+	//	vNormal = uModelMatrixStack[uIndex].modelViewMatInverseTranspose * aPosition;
+	//	vTexCoord = atlasMat * texCoord;
+
+
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;

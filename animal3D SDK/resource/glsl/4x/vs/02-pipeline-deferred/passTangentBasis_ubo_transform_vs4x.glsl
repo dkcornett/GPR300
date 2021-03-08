@@ -59,17 +59,32 @@ uniform int uIndex;
 flat out int vVertexID;
 flat out int vInstanceID;
 
+//view-space varyings
+out vec4 vPosition;
+out vec4 vNormal;
+out vec4 vTexcoord;
+
+out vec4 vPosition_screen;
+
+const mat4 bias = mat4(
+	0.5f, 0.0f, 0.0f, 0.0f,
+	0.0f, 0.5f, 0.0f, 0.0f,
+	0.0f, 0.0f, 0.5f, 0.0f,
+	0.5f, 0.5f, 0.5f, 1.0f
+);
+
 void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
 	//gl_Position = aPosition;
 	gl_position = uModelMatrixStack[uIndex].modelViewProjectionMat;
+	vPosition_screen = bias * gl_Position;
 
 	//??? = uModelMatrixStack[uIndex].modelViewMat * aPosition;
 
 	vPosition = uModelMatrixStack[uIndex].modelViewMat * aPosition;
-	//	vNormal = uModelMatrixStack[uIndex].modelViewMatInverseTranspose * aPosition;
-	//	vTexCoord = atlasMat * texCoord;
+	vNormal = uModelMatrixStack[uIndex].modelViewMatInverseTranspose * aPosition;
+	vTexCoord = atlasMat * texCoord;
 
 
 

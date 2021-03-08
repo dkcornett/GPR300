@@ -43,17 +43,15 @@ in vec4 vTexcoord_atlas;
 
 uniform int uCount;
 
-uniform sampler2D uImage00;	//diffuse
+uniform sampler2D uImage00;	//diffuse atlas
 uniform sampler2D uImage01;	// specular atlas
 
-uniform sampler2D uImage04;	//texcoords
-uniform sampler2D uImage05;	//normals
-uniform sampler2D uImage06;	//"position"
-uniform sampler2D uImage07;	//depth
+uniform sampler2D uImage04;	//scene texcoords
+uniform sampler2D uImage05;	//scene normals
+//uniform sampler2D uImage06;	//"position"
+uniform sampler2D uImage07;	//scene depth
 
-
-
-
+uniform mat4 uPB_inv;		//inverse bias projection
 
 /// testing
 //uniform sampler2D uImage02, uImage03;
@@ -84,12 +82,26 @@ void main()
 	// - > sample atlas using sceneTexoord
 	vec4 sceneTexcoord = texture(uImage04, vTexcoord_atlas.xy);
 	vec4 diffuseSample = texture(uImage00, sceneTexcoord.xy);
-	
+	vec4 specularSample = texture(uImage01, sceneTexcoord.xy);
+
+	vec4 position_screen = vTexcoord_atlas;
+	position_screen.z = texture(uImage07, vTexcoord_atlas.xy).r;
+
+	vec4 position_view = uPB_inv * position_screen;
+	position_view /= position_view.w;
+
+	vec4 normal_view = texture(uImage05, vTexcoord_atlas.xy);
+	normal_view = (normal_view - 0.05f) * 2.0f;
+
 	// DEBUGGING
 	//rtFragColor = vTexCoord_atlas;
 	//rtFragColor = texture(uImage00, vTexcoord_atlas);
 //	rtFragColor = texture(uImage01, vTexcoord_atlas);
 	//rtFragColor = sceneTexcoord;
-	rtFragColor = diffuseSample;
+//	rtFragColor = diffuseSample;
+	rtFragColor = normal_view;
+
+	//transparency 
+	rtFragColor.a = diffuseSample.a;
 
 }

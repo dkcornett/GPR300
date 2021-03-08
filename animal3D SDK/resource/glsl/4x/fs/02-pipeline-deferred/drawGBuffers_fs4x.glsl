@@ -36,6 +36,8 @@ in vec4 vPosition;
 in vec4 vNormal;
 in vec4 vTexCoord;
 
+in vec4 vPosition_screen; 
+
 //layout (location = 0) out vec4 rtFragColor;
 layout (location = 0) out vec4 rtTexCoord;
 layout (location = 1) out vec4 rtNormal;
@@ -48,4 +50,5 @@ void main()
 	rtTexCoord = vTexCoord;
 	rtNormal = vec4(normalize(vNormal.xyz) * 0.5f + 0.5f, 1.0f);
 //	rtPosition = vPosition;
+	rtPosition = vPosition_screen / vPosition_screen.w;
 }

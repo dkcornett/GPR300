@@ -326,10 +326,11 @@ void a3ssfx_render(a3_DemoState const* demoState, a3_DemoMode2_SSFX const* demoM
 		//	-> activate and send pertinent uniform blocks and values
 		//		(hint: light buffer, light transforms, inverse bias-projection)
 		//		(hint: inverse bias-projection variable is commented out above)
-	/*	// draw light volumes
+		// draw light volumes
 		currentDemoProgram = demoState->prog_drawPhongPointLight_instanced;
 		a3shaderProgramActivate(currentDemoProgram->program);
-		//...*/
+		//a3framebufferBindColorTexture(demoState->fbo_c16x4 + 0, a3tex_unit00, 0);
+		//...
 
 		currentWriteFBO = writeFBO[ssfx_renderPassLights];
 		a3framebufferActivate(currentWriteFBO);
@@ -394,8 +395,8 @@ void a3ssfx_render(a3_DemoState const* demoState, a3_DemoMode2_SSFX const* demoM
 		a3textureActivate(demoState->tex_atlas_dm, a3tex_unit00); // diffuse texture atlas
 		a3framebufferBindColorTexture(demoState->fbo_c16x4_d24s8, a3tex_unit04, 0);	//texcoords
 		a3framebufferBindColorTexture(demoState->fbo_c16x4_d24s8, a3tex_unit05, 1);	//normals
-		//a3framebufferBindColorTexture(demoState->fbo_c16x4_d24s8, a3tex_unit06, 3);	//"position"
-		//a3framebufferBindDepthTexture(demoState->fbo_c16x4_d24s8, a3tex_unit07);	//normals
+		a3framebufferBindColorTexture(demoState->fbo_c16x4_d24s8, a3tex_unit06, 3);	//"position"
+		a3framebufferBindDepthTexture(demoState->fbo_c16x4_d24s8, a3tex_unit07);	//normals
 		a3framebufferBindDepthTexture(demoState->fbo_c16x4_d24s8, a3tex_unit07);		//depth
 		a3shaderUniformSendFloatMat(a3unif_mat4, 0, currentDemoProgram->uPB_inv, 1, projectionBiasMatInv.mm);
 		//...

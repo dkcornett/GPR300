@@ -48,7 +48,7 @@ uniform sampler2D uImage01;	// specular atlas
 
 uniform sampler2D uImage04;	//scene texcoords
 uniform sampler2D uImage05;	//scene normals
-//uniform sampler2D uImage06;	//"position"
+uniform sampler2D uImage06;	//"position"
 uniform sampler2D uImage07;	//scene depth
 
 uniform mat4 uPB_inv;		//inverse bias projection
@@ -99,7 +99,8 @@ void main()
 //	rtFragColor = texture(uImage01, vTexcoord_atlas);
 	//rtFragColor = sceneTexcoord;
 //	rtFragColor = diffuseSample;
-	rtFragColor = normal_view;
+	//rtFragColor = normal_view;
+	rtFragColor = position_view;
 
 	//transparency 
 	rtFragColor.a = diffuseSample.a;

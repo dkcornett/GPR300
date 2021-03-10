@@ -36,8 +36,10 @@
 //		(hint: texcoord transformed to atlas coordinates in a similar fashion)
 
 layout (location = 0) in vec4 aPosition;
-// layout (location = 2) in vec3 vNormal;
-// layout (location = 8) in vec4 vTexCoord;
+//layout (location = 2) in vec3 aNormal;
+layout (location = 8) in vec4 aTexCoord;
+layout (location = 10) in vec4 aTangent;
+layout (location = 11) in vec4 aBittangent;
 
 struct sModelMatrixStack
 {
@@ -61,8 +63,10 @@ flat out int vInstanceID;
 
 //view-space varyings
 out vec4 vPosition;
-out vec4 vNormal;
+//out vec4 vNormal;
 out vec4 vTexcoord;
+out vec4 vTangent;
+out vec4 vBittangent;
 
 out vec4 vPosition_screen;
 
@@ -77,14 +81,11 @@ void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
 	//gl_Position = aPosition;
-	gl_position = uModelMatrixStack[uIndex].modelViewProjectionMat;
+	gl_Position = uModelMatrixStack[uIndex].modelViewProjectionMat * aPosition;
 	vPosition_screen = bias * gl_Position;
-
-	//??? = uModelMatrixStack[uIndex].modelViewMat * aPosition;
-
 	vPosition = uModelMatrixStack[uIndex].modelViewMat * aPosition;
-	vNormal = uModelMatrixStack[uIndex].modelViewMatInverseTranspose * aPosition;
-	vTexCoord = atlasMat * texCoord;
+	//vNormal = uModelMatrixStack[uIndex].modelViewMatInverseTranspose * aPosition;
+	vTexcoord = uModelMatrixStack[uIndex].atlasMat * aTexCoord;
 
 
 

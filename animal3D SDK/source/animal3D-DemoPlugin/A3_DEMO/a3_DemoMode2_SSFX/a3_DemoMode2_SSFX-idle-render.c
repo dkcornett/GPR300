@@ -327,17 +327,40 @@ void a3ssfx_render(a3_DemoState const* demoState, a3_DemoMode2_SSFX const* demoM
 		//		(hint: light buffer, light transforms, inverse bias-projection)
 		//		(hint: inverse bias-projection variable is commented out above)
 		// draw light volumes
-		currentDemoProgram = demoState->prog_drawPhongPointLight_instanced;
+		
+		//declare pass
+		currentDemoProgram = demoState->prog_drawPhongPointLight_instanced;		//demoState->fbo_c16x4 + 0
 		a3shaderProgramActivate(currentDemoProgram->program);
-		a3textureActivate(demoState->tex_atlas_dm, a3tex_unit00); // diffuse texture atlas
-		a3framebufferBindColorTexture(demoState->fbo_c16x4_d24s8, a3tex_unit04, 0);	//texcoords
-		a3framebufferBindColorTexture(demoState->fbo_c16x4_d24s8, a3tex_unit05, 1);	//normals
-		a3framebufferBindColorTexture(demoState->fbo_c16x4_d24s8, a3tex_unit06, 3);	//"position"
-		a3framebufferBindDepthTexture(demoState->fbo_c16x4_d24s8, a3tex_unit07);	//normals
-		a3framebufferBindDepthTexture(demoState->fbo_c16x4_d24s8, a3tex_unit07);		//depth
-		a3shaderUniformSendFloatMat(a3unif_mat4, 0, currentDemoProgram->uPB_inv, 1, projectionBiasMatInv.mm);
-		//...
 
+		//animation data
+		a3shaderUniformSendFloat(a3unif_vec4, currentDemoProgram->uColor0, hueCount, rgba4->v);
+		if (demoState->updateAnimation)
+			a3shaderUniformSendDouble(a3unif_single, currentDemoProgram->uTime, 1, &demoState->timer_display->totalTime);
+
+		// send lighting uniforms and bind blocks where appropriate
+		a3shaderUniformBufferActivate(demoState->ubo_transform, demoProg_blockTransformStack);
+		a3shaderUniformBufferActivate(demoState->ubo_light, demoProg_blockLight);
+		a3shaderUniformSendInt(a3unif_single, currentDemoProgram->uCount, 1, renderModeLightCount + renderMode);
+
+
+		// activate texture atlases
+		a3textureActivate(demoState->tex_atlas_dm, a3tex_unit00);
+		a3textureActivate(demoState->tex_atlas_sm, a3tex_unit01);
+		a3textureActivate(demoState->tex_atlas_nm, a3tex_unit02);
+		a3textureActivate(demoState->tex_atlas_hm, a3tex_unit03);
+
+		//drawing the actual objects for this pass
+		for (currentSceneObject = demoMode->obj_sphere, endSceneObject = demoMode->obj_ground;
+			currentSceneObject <= endSceneObject; ++currentSceneObject)
+		{
+			// send index as uniform and draw; all other model data is shared
+			j = currentSceneObject->sceneHierarchyIndex;
+			a3shaderUniformSendInt(a3unif_single, currentDemoProgram->uIndex, 1, &j);
+			a3vertexDrawableActivateAndRender(drawable[j]);
+		}
+
+
+		//this block ends shader setup, do not edit
 		currentWriteFBO = writeFBO[ssfx_renderPassLights];
 		a3framebufferActivate(currentWriteFBO);
 		glClear(GL_COLOR_BUFFER_BIT);

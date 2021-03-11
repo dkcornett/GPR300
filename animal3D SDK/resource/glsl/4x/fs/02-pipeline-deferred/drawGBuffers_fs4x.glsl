@@ -32,9 +32,11 @@
 //	-> calculate final normal
 //	-> output pertinent surface data
 
-in vec4 vPosition;
-in vec4 vNormal;
-in vec4 vTexCoord;
+out vec4 vPosition;
+out vec4 vNormal;
+out vec4 vTexcoord;
+out vec3 vTangent;
+out vec4 vBittangent;
 
 in vec4 vPosition_screen; 
 
@@ -47,7 +49,7 @@ void main()
 {
 	// DUMMY OUTPUT: all fragments are OPAQUE MAGENTA
 	//rtFragColor = vec4(1.0, 0.0, 1.0, 1.0
-	rtTexCoord = vTexCoord;
+	rtTexCoord = vTexcoord;
 	rtNormal = vec4(normalize(vNormal.xyz) * 0.5f + 0.5f, 1.0f);
 //	rtPosition = vPosition;
 	rtPosition = vPosition_screen / vPosition_screen.w;

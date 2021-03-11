@@ -24,14 +24,15 @@
 
 #version 450
 
-// ****TO-DO: 
+// ****DONE
 //	-> set tessellation levels, adjust as needed
 
-layout (vertices = 2) out;
+layout (vertices = 2) out;		//note: IT'S A LINE! 2 vertices per patch!
 
 uniform vec2 uLevelOuter;
 
 void main()
 {
-	
+	gl_TessLevelOuter[0] = uLevelOuter[0];		//so we're just fixing tesselation to go on through
+	gl_TessLevelOuter[1] = uLevelOuter[1];
 }

@@ -107,17 +107,21 @@ void a3curves_render_controls(a3_DemoState const* demoState, a3_DemoMode3_Curves
 
 
 //-----------------------------------------------------------------------------
-
+//refer to tesselation documentation for this bit
 a3ret a3vertexDrawableRenderIsoPatches(a3ui32 const count)
-{
+{					
 	if (count)
 	{
 		// ****TO-DO: 
-		//	-> set patch vertices parameter for isolines
-		//	-> disable anything that would result in a VAO, VBO and/or IBO based render
+		//	-> set patch vertices parameter for isolines		//done
+		//	-> disable anything that would result in a VAO, VBO and/or IBO based render		//done
 		//	-> invoke rendering enough vertices to cover all path segments
 		// force isoline patches
-
+		glPatchParameteri(GL_PATCH_VERTICES, 2);
+		glBindVertexArray(0);			//DO NOT BIND ANY VERTEX DATA!
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glDrawArrays(GL_PATCHES, 0, count * 2);
 		return 1;
 	}
 	return -1;
@@ -492,10 +496,10 @@ void a3curves_render(a3_DemoState const* demoState, a3_DemoMode3_Curves const* d
 			currentDemoProgram = demoState->prog_drawCurvePath;
 			a3shaderProgramActivate(currentDemoProgram->program);
 			a3shaderUniformBufferActivate(demoState->ubo_curve, demoProg_blockCurve);
-			a3shaderUniformSendFloatMat(a3unif_mat4, 0, currentDemoProgram->uP, 1, viewProjectionMat.mm);
-			a3shaderUniformSendFloat(a3unif_vec2, currentDemoProgram->uLevelOuter, 1, tessLevelCurve[0]);
-			a3shaderUniformSendInt(a3unif_single, currentDemoProgram->uCount, 1, &demoMode->curveWaypointCount);
-			a3vertexDrawableRenderIsoPatches(demoMode->curveWaypointCount);
+			a3shaderUniformSendFloatMat(a3unif_mat4, 0, currentDemoProgram->uP, 1, viewProjectionMat.mm);		//bring us to camera space AND do view projection
+			a3shaderUniformSendFloat(a3unif_vec2, currentDemoProgram->uLevelOuter, 1, tessLevelCurve[0]);		//curves being done as vector2 to the new uLevelOuter
+			a3shaderUniformSendInt(a3unif_single, currentDemoProgram->uCount, 1, &demoMode->curveWaypointCount);	//
+			a3vertexDrawableRenderIsoPatches(demoMode->curveWaypointCount);										//isopatches? how many waypoints?
 		}
 
 		if (demoState->displayTangentBases || demoState->displayWireframe)

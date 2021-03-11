@@ -124,7 +124,7 @@ void a3ssfx_update_scene(a3_DemoState* demoState, a3_DemoMode2_SSFX* demoMode, a
 			projector->sceneObjectPtr->modelMatrixStackPtr->modelMatInverse.m,
 			pointLightData->worldPos.v);
 
-		// ****TO-DO:
+		// ****DONE?
 		//	-> calculate light transformation
 		//		(hint: in the previous line, we calculate the view-space position)
 		//		(hint: determine the scale part, append position and multiply by 
@@ -134,14 +134,6 @@ void a3ssfx_update_scene(a3_DemoState* demoState, a3_DemoMode2_SSFX* demoMode, a
 		
 	//	a3vec3 scale = float (pointLightData->position.x, pointLightData->position.s, pointLightData->position.v);
 
-//pointLightData->position *= pointLightData->position.x;
-
-		/*
-		float scale;
-		a3realMuls(pointLightData->position.x * scale);
-		a3realMuls(pointLightData->position.s * scale);
-		a3realMuls(pointLightData->position.r * scale);
-*/
 
 		//scaling
 		a3mat4 newScale =
@@ -154,7 +146,7 @@ void a3ssfx_update_scene(a3_DemoState* demoState, a3_DemoMode2_SSFX* demoMode, a
 		a3real4Real4x4Product(pointLightData->position.v, pointLightData->position.v, newScale.m );
 	
 		//multiply by projection matrix
-		//a3real4x4Product(pointLightData->position.v, pointLightData->position.v, projector->projectorMatrixStackPtr->projectionMat.m);
+		a3real4x4Product(pointLightData->position.v, pointLightData->position.v, projector->projectorMatrixStackPtr->projectionMatInverse.m);
 
 	}
 }

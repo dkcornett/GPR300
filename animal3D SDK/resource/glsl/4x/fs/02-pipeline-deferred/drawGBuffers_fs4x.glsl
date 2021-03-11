@@ -32,12 +32,14 @@
 //	-> calculate final normal
 //	-> output pertinent surface data
 
+//what we're outputting to the next pass
 out vec4 vPosition;
 out vec4 vNormal;
 out vec4 vTexcoord;
 out vec3 vTangent;
 out vec4 vBittangent;
 
+//what comes in
 in vec4 vPosition_screen; 
 
 //layout (location = 0) out vec4 rtFragColor;

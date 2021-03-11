@@ -88,9 +88,9 @@ void main()
 
 	//tangent basis [TBNP] transformed to view-space
 	//Based on https://learnopengl.com/Advanced-Lighting/Normal-Mapping
-	vec4 T = normalize(uModelMatrixStack[uIndex].modelViewMat * vec4(aTangent, 0.0));
-
-
+	vec3 T = normalize(uModelMatrixStack[uIndex].modelViewMat * vec4(aTangent, 0.0)).rgb;
+	vec3 B = normalize(uModelMatrixStack[uIndex].modelViewMat * vec4(aBittangent, 0.0)).rgb;
+	mat3 TBN = mat3 (T, B, normalize(vNormal));
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;

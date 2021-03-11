@@ -80,7 +80,7 @@ const mat4 bias = mat4(
 void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
-	//gl_Position = aPosition;
+	gl_Position = aPosition;
 	gl_Position = uModelMatrixStack[uIndex].modelViewProjectionMat * aPosition;
 	vPosition_screen = bias * gl_Position;
 	vPosition = uModelMatrixStack[uIndex].modelViewMat * aPosition;

@@ -42,9 +42,9 @@ layout (location = 0) out vec4 rtFragColor;
 
 in vec4 vPosition;
 in vec4 vNormal;
-in vec4 vTexcoord;
-in vec4 vTangent;
-in vec4 vBittangent;
+in vec2 vTexcoord;
+in vec3 vTangent;
+in vec3 vBittangent;
 
 // location of viewer in its own space is the origin
 const vec4 kEyePos_view = vec4(0.0, 0.0, 0.0, 1.0);

@@ -37,9 +37,9 @@
 
 layout (location = 0) in vec4 aPosition;
 layout (location = 2) in vec3 aNormal;
-layout (location = 8) in vec4 aTexCoord;
-layout (location = 10) in vec4 aTangent;
-layout (location = 11) in vec4 aBittangent;
+layout (location = 8) in vec2 aTexCoord;
+layout (location = 10) in vec3 aTangent;
+layout (location = 11) in vec3 aBittangent;
 
 struct sModelMatrixStack
 {
@@ -64,9 +64,9 @@ flat out int vInstanceID;
 //view-space varyings
 out vec4 vPosition;
 out vec4 vNormal;
-out vec4 vTexcoord;
+out vec2 vTexcoord;
 out vec3 vTangent;
-out vec4 vBittangent;
+out vec3 vBittangent;
 
 out vec4 vPosition_screen;
 
@@ -85,8 +85,10 @@ void main()
 	vPosition_screen = bias * gl_Position;
 	vPosition = uModelMatrixStack[uIndex].modelViewMat * aPosition;
 	vNormal = uModelMatrixStack[uIndex].modelViewMatInverseTranspose * aPosition;
-	vTexcoord = uModelMatrixStack[uIndex].atlasMat * aTexCoord;
-	//vTangent = ??? * aTexCoord;
+
+	//tangent basis [TBNP] transformed to view-space
+	//Based on https://learnopengl.com/Advanced-Lighting/Normal-Mapping
+	vec4 T = normalize(uModelMatrixStack[uIndex].modelViewMat * vec4(aTangent, 0.0));
 
 
 

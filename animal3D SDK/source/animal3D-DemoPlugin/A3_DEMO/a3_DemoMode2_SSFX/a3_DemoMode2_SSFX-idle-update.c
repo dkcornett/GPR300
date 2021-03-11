@@ -151,10 +151,10 @@ void a3ssfx_update_scene(a3_DemoState* demoState, a3_DemoMode2_SSFX* demoMode, a
 		0.0f, 0.0f, 0.0f, 1.0f};
 
 		//fix position to scale
-		a3real4x4Product(pointLightData->position.v, pointLightData->position.v, newScale.m, );
+		a3real4Real4x4Product(pointLightData->position.v, pointLightData->position.v, newScale.m );
 	
 		//multiply by projection matrix
-		a3real4x4Product(pointLightData->position.v, pointLightData->position.v, projector->projectorMatrixStackPtr->projectionMat.m);
+		//a3real4x4Product(pointLightData->position.v, pointLightData->position.v, projector->projectorMatrixStackPtr->projectionMat.m);
 
 	}
 }

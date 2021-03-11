@@ -27,13 +27,17 @@
 #define MAX_INSTANCES 1024
 
 // ****TO-DO: 
-//	-> declare uniform block containing MVP for all lights
-//	-> calculate final clip-space position
-//	-> declare varying for biased clip-space position
-//	-> calculate and copy biased clip to varying
-//		(hint: bias matrix is provided as a constant)
+//	-> declare uniform block containing MVP for all lights			// done
+//	-> calculate final clip-space position							//WIP	//MVP
+//	-> declare varying for biased clip-space position				//
+//	-> calculate and copy biased clip to varying					//
+//		(hint: bias matrix is provided as a constant)				//
 
 layout (location = 0) in vec4 aPosition;
+
+uniform mat4 uMVP;
+
+//mat4 clipMVP = uMVP * //worldMVP?
 
 flat out int vVertexID;
 flat out int vInstanceID;
@@ -50,6 +54,7 @@ void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
 	gl_Position = aPosition;
+//	gl_Position = aPosition * bias;
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;

@@ -41,7 +41,7 @@
 
 void a3ssfx_update_graphics(a3_DemoState* demoState, a3_DemoMode2_SSFX* demoMode)
 {
-	// ****TO-DO:
+	// ****DONE?
 	//	-> uncomment transformation and light data uploads
 	//	-> add line to upload light transformations
 	//		(hint: just individual matrices, see scene update)
@@ -130,10 +130,32 @@ void a3ssfx_update_scene(a3_DemoState* demoState, a3_DemoMode2_SSFX* demoMode, a
 		//		(hint: determine the scale part, append position and multiply by 
 		//			projection matrix to arrive at a proper MVP for each light)
 		// update and transform light matrix
-		//a3real4x4Product(pointLightData->position.v,
-		//	projector->projectorMatrixStackPtr->projectionMatInverse.m,
-		//	pointLightData->worldPos.v);
-		//...
+		//a3_PointLightComponent
+		
+	//	a3vec3 scale = float (pointLightData->position.x, pointLightData->position.s, pointLightData->position.v);
+
+//pointLightData->position *= pointLightData->position.x;
+
+		/*
+		float scale;
+		a3realMuls(pointLightData->position.x * scale);
+		a3realMuls(pointLightData->position.s * scale);
+		a3realMuls(pointLightData->position.r * scale);
+*/
+
+		//scaling
+		a3mat4 newScale =
+		{ pointLightData->position.x, 0.0f, 0.0f, 0.0f,
+		0.0f, pointLightData->position.s, 0.0f, 0.0f,
+		0.0f, 0, pointLightData->position.r, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f};
+
+		//fix position to scale
+		a3real4x4Product(pointLightData->position.v, pointLightData->position.v, newScale.m, );
+	
+		//multiply by projection matrix
+		a3real4x4Product(pointLightData->position.v, pointLightData->position.v, projector->projectorMatrixStackPtr->projectionMat.m);
+
 	}
 }
 

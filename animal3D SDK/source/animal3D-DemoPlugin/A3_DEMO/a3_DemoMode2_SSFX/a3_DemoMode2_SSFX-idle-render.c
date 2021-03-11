@@ -329,7 +329,7 @@ void a3ssfx_render(a3_DemoState const* demoState, a3_DemoMode2_SSFX const* demoM
 		// draw light volumes
 		currentDemoProgram = demoState->prog_drawPhongPointLight_instanced;
 		a3shaderProgramActivate(currentDemoProgram->program);
-		//a3framebufferBindColorTexture(demoState->fbo_c16x4 + 0, a3tex_unit00, 0);
+		
 		//...
 
 		currentWriteFBO = writeFBO[ssfx_renderPassLights];

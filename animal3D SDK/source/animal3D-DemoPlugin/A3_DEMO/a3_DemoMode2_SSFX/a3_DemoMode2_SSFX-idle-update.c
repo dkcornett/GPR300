@@ -130,9 +130,9 @@ void a3ssfx_update_scene(a3_DemoState* demoState, a3_DemoMode2_SSFX* demoMode, a
 		//		(hint: determine the scale part, append position and multiply by 
 		//			projection matrix to arrive at a proper MVP for each light)
 		// update and transform light matrix
-		a3real4Real4x4Product(&pointLightData->position.t,
-			projector->sceneObjectPtr->modelMatrixStackPtr->modelMatInverse.m,
-			&pointLightData->worldPos.t); //????I have no idea if this is right????
+		//a3real4x4Product(pointLightData->position.v,
+		//	projector->projectorMatrixStackPtr->projectionMatInverse.m,
+		//	pointLightData->worldPos.v);
 		//...
 	}
 }

@@ -112,12 +112,15 @@ a3ret a3vertexDrawableRenderIsoPatches(a3ui32 const count)
 {					
 	if (count)
 	{
-		// ****TO-DO: 
+		// ****DONE: 
 		//	-> set patch vertices parameter for isolines		//done
 		//	-> disable anything that would result in a VAO, VBO and/or IBO based render		//done
 		//	-> invoke rendering enough vertices to cover all path segments
 		// force isoline patches
+		float defaultTessLevelsOuter[4] = { 1.0f, 1.0f, 1.0f, 1.0f, }, defaultTessLevelsInner[2] = {1.0f, 1.0f};
 		glPatchParameteri(GL_PATCH_VERTICES, 2);
+		glPatchParameterfv(GL_PATCH_DEFAULT_OUTER_LEVEL, defaultTessLevelsOuter);
+		glPatchParameterfv(GL_PATCH_DEFAULT_INNER_LEVEL, defaultTessLevelsInner);
 		glBindVertexArray(0);			//DO NOT BIND ANY VERTEX DATA!
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

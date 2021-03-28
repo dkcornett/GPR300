@@ -94,6 +94,8 @@ void main()
 		0.0,
 		0.0
 	);
+
+	
 	
 	// parallax occlusion mapping
 	vec3 texcoord = vec3(vTexcoord_atlas.xy, uSize);

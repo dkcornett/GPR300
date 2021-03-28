@@ -38,6 +38,7 @@ uniform ubCurve
 };
 
 uniform mat4 uP;
+uniform int uCount;
 
 out vec4 vColor;
 

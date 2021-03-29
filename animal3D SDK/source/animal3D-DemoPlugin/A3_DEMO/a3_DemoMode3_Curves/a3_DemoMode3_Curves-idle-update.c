@@ -60,6 +60,23 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 		//		(hint: check if we've surpassed the segment's duration)
 		// teapot follows curved path
 
+		//CHECK THIS WORK AGAINST DAN'S DIAGRAM FROM 3/29
+		// use curveSegmentIndex
+		//		i(start) = currentSegmentIndex
+		//		i(end) = (currentSegmentIndex + 1) % count
+		//		start + (end - start) * (curveSegmentTime(1/curveSegmentDuration))		// IS that curveSegmentDurationInv????
+
+		//update time
+		// time = time + deltaTime
+		//	if (t > dur)
+		//			t -+ dur
+		//			start = end
+		//			end = (start + 1) % count
+
+		// u = t / dur = t(1 / dur)
+
+		//update teapot position
+
 	}
 }
 

@@ -45,9 +45,44 @@ layout (triangles) in;
 
 layout (line_strip, max_vertices = MAX_VERTICES) out;
 
+in vbVertexData {
+	mat4 vTangentBasis_view;
+	vec4 vTexcoord_atlas;
+} vVertextData[];
+
 out vec4 vColor;
+
+void drawWireframe()
+{
+	//gl_in[].gl_Position
+
+	vColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	gl_Position = gl_in[0].glPosition;
+	EmitVertex();
+	gl_Position = gl_in[1].glPosition;
+	EmitVertex();
+	EndPrimitive();
+
+	vColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);
+	gl_Position = gl_in[1].glPosition;
+	EmitVertex();
+	gl_Position = gl_in[2].glPosition;
+	EmitVertex();
+	EndPrimitive();
+
+	vColor = vec4(0.0f, 0.0f, 1.0f, 1.0f);
+	gl_Position = gl_in[2].glPosition;
+	EmitVertex();
+	gl_Position = gl_in[0].glPosition;
+	EmitVertex();
+	EndPrimitive();
+}
+
+void drawVertexTangents()
+{
+}
 
 void main()
 {
-	
+	drawWireframe();
 }

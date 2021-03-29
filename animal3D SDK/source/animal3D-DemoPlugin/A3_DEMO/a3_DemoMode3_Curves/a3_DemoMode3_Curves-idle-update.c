@@ -30,7 +30,7 @@
 
 #include "../a3_DemoMode3_Curves.h"
 
-//typedef struct a3_DemoState a3_DemoState;
+typedef struct a3_DemoState a3_DemoState;
 #include "../a3_DemoState.h"
 
 #include "../_a3_demo_utilities/a3_DemoMacros.h"
@@ -52,7 +52,6 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 	if (demoState->updateAnimation)
 	{
 		a3_SceneObjectData* sceneObjectData = demoMode->obj_teapot->dataPtr;
-
 		// ****TO-DO: 
 		//	-> interpolate teapot's position using algorithm that matches path drawn
 		//		(hint: use the one that looks the best)
@@ -65,18 +64,32 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 		//		i(start) = currentSegmentIndex
 		//		i(end) = (currentSegmentIndex + 1) % count
 		//		start + (end - start) * (curveSegmentTime(1/curveSegmentDuration))		// IS that curveSegmentDurationInv????
-
+		//
 		//update time
-		// time = time + deltaTime
+		// time += time + deltaTime
 		//	if (t > dur)
-		//			t -+ dur
+		//			t =- dur
 		//			start = end
 		//			end = (start + 1) % count
-
 		// u = t / dur = t(1 / dur)
-
 		//update teapot position
 
+		//Interpolate Teapot Position
+		a3ui32 start = demoMode->curveSegmentIndex;
+		a3ui32 end = (demoMode->curveSegmentIndex + 1) % demoMode->curveWaypointCount;
+		start + (end - start) * (demoMode->curveSegmentTime * (1 / demoMode->curveSegmentDuration));
+
+		//Update animation Timer
+		//demoMode->curveSegmentTime += /*deltaTime*/;
+		if (demoMode->curveSegmentTime > dt)
+		{
+			demoMode->curveSegmentTime -= dt;
+			start = end;
+			end = (start + 1) % demoMode->curveWaypointCount;
+		}
+		// u = demoMode->curveSegmentTime / dt = demoMode->curveSegmentTime * (1 / dt); What is u ?????
+
+		//UPDATE TEAPOT POSITION
 	}
 }
 

@@ -80,14 +80,14 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 		start + (end - start) * (demoMode->curveSegmentTime * (1 / demoMode->curveSegmentDuration));
 
 		//Update animation Timer
-		//demoMode->curveSegmentTime += /*deltaTime*/;
-		if (demoMode->curveSegmentTime > dt)
+		demoMode->curveSegmentTime += dt;
+		if (demoMode->curveSegmentTime >= demoMode->curveSegmentDuration)
 		{
-			demoMode->curveSegmentTime -= dt;
-			start = end;
+			demoMode->curveSegmentTime -= demoMode->curveSegmentDuration;
+			demoMode->curveSegmentIndex = end;
 			end = (start + 1) % demoMode->curveWaypointCount;
 		}
-		// u = demoMode->curveSegmentTime / dt = demoMode->curveSegmentTime * (1 / dt); What is u ?????
+		demoMode->curveSegmentParam = demoMode->curveSegmentTime * demoMode->curveSegmentDurationInv;
 
 		//UPDATE TEAPOT POSITION
 	}

@@ -37,12 +37,12 @@ layout (triangles, equal_spacing) in;
 
 in vbVertexData_tess {
 	mat4 vTangentBasis_view;
-	vec4 vTexcoord_atlas;
-} vVertextData_tess[];
+	vec4 vTexCoord_atlas;
+} vVertexData_tess[];
 
 out vbVertexData {
 	mat4 vTangentBasis_view;
-	vec4 vTexcoord_atlas;
+	vec4 vTexCoord_atlas;
 };
 
 void main()

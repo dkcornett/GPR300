@@ -38,12 +38,12 @@ layout (vertices = 3) out;
 in vbVertexData {
 	mat4 vTangentBasis_view;
 	vec4 vTexcoord_atlas;
-} vVertextData_in[];
+} vbVertextData_in[];
 
 out vbVertexData_tess {
 	mat4 vTangentBasis_view;
 	vec4 vTexcoord_atlas;
-} vVertextData_tess[];
+} vbVertextData_tess[];
 
 
 uniform vec3 uLevelOuter;
@@ -51,10 +51,10 @@ uniform float uLevelInner;
 
 void main()
 {
-	vVertexData_tess[gl_InvocationID].vTangentBasis_view
-		= vVertexData[gl_InvocationID].vTangentBasis_view;
-	vVertexData_tess[gl_InvocationID].vTexCoord_atlas;
-		= vVertexData[gl_InvocationID].vTexCoord_atlas;
+	vbVertexData_tess[gl_InvocationID].vTangentBasis_view
+		= vbVertexData[gl_InvocationID].vTangentBasis_view;
+	vbVertexData_tess[gl_InvocationID].vTexCoord_atlas
+		= vbVertexData[gl_InvocationID].vTexCoord_atlas;
 
 
 	gl_TessLevelOuter[0] = uLevelOuter[0];

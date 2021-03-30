@@ -24,7 +24,7 @@
 
 #version 450
 
-// ****TO-DO: 
+// ****TO-DO: WIP?
 //	-> declare uniform block for spline waypoint and handle data
 //	-> implement spline interpolation algorithm based on scene object's path
 //	-> interpolate along curve using correct inputs and project result
@@ -57,8 +57,8 @@ void main()
 	int i1 = (i0 + 1) % uCount;
 	float u = gl_TessCoord[0];
 
-	//vec4 p = vec4(gl_TessCoord[0], 0.0f, -1.0f,  1.0f);		//THIS IS WHERE INTERPOLATION INSTRUCTIONS ARE!
-	vec4 p = mix(
+	vec4 p = vec4(gl_TessCoord[0], 0.0f, -1.0f,  1.0f);		//THIS IS WHERE INTERPOLATION INSTRUCTIONS ARE!
+	p = mix(
 		uCurveWaypoint[i0],
 		uCurveWaypoint[i1],
 		u

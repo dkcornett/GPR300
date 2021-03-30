@@ -25,7 +25,7 @@
 #version 450
 
 // ****TO-DO: 
-//	-> declare inbound and outbound varyings to pass along vertex data
+//	-> declare inbound and outbound varyings to pass along vertex data		//DONE
 //		(hint: inbound matches TCS naming and is still an array)
 //		(hint: outbound matches GS/FS naming and is singular)
 //	-> copy varying data from input to output

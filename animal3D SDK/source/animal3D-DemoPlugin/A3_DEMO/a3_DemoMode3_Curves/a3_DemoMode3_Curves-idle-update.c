@@ -52,44 +52,29 @@ void a3curves_update_animation(a3_DemoState* demoState, a3_DemoMode3_Curves* dem
 	if (demoState->updateAnimation)
 	{
 		a3_SceneObjectData* sceneObjectData = demoMode->obj_teapot->dataPtr;
-		// ****TO-DO: 
+		// ****DONE: 
 		//	-> interpolate teapot's position using algorithm that matches path drawn
 		//		(hint: use the one that looks the best)
 		//	-> update the animation timer
 		//		(hint: check if we've surpassed the segment's duration)
 		// teapot follows curved path
 
-		//CHECK THIS WORK AGAINST DAN'S DIAGRAM FROM 3/29
-		// use curveSegmentIndex
-		//		i(start) = currentSegmentIndex
-		//		i(end) = (currentSegmentIndex + 1) % count
-		//		start + (end - start) * (curveSegmentTime(1/curveSegmentDuration))		// IS that curveSegmentDurationInv????
-		//
-		//update time
-		// time += time + deltaTime
-		//	if (t > dur)
-		//			t =- dur
-		//			start = end
-		//			end = (start + 1) % count
-		// u = t / dur = t(1 / dur)
-		//update teapot position
-
 		//Interpolate Teapot Position
 		a3ui32 start = demoMode->curveSegmentIndex;
 		a3ui32 end = (demoMode->curveSegmentIndex + 1) % demoMode->curveWaypointCount;
-		start + (end - start) * (demoMode->curveSegmentTime * (1 / demoMode->curveSegmentDuration));
-
+		
+		//Lerp Teapots position
+		a3real4Lerp(sceneObjectData->position.v, demoMode->curveWaypoint[start].v
+			, demoMode->curveWaypoint[end].v, demoMode->curveSegmentParam);
+		
 		//Update animation Timer
-		demoMode->curveSegmentTime += dt;
+		demoMode->curveSegmentTime += (a3f32)dt;
 		if (demoMode->curveSegmentTime >= demoMode->curveSegmentDuration)
 		{
 			demoMode->curveSegmentTime -= demoMode->curveSegmentDuration;
 			demoMode->curveSegmentIndex = end;
-			end = (start + 1) % demoMode->curveWaypointCount;
 		}
 		demoMode->curveSegmentParam = demoMode->curveSegmentTime * demoMode->curveSegmentDurationInv;
-
-		//UPDATE TEAPOT POSITION
 	}
 }
 

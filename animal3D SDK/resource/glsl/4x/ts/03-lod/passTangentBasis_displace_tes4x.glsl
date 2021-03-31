@@ -22,7 +22,7 @@
 	Pass interpolated and displaced tangent basis.
 */
 
-#version 450
+#version 450 core
 
 // ****TO-DO: 
 //	-> declare inbound and outbound varyings to pass along vertex data		//DONE
@@ -45,9 +45,15 @@ out vbVertexData {
 	vec4 vTexCoord_atlas;
 };
 
+
 void main()
 {
+	gl_Position = (gl_TessCoord.x * gl_in[0].gl_Position +
+					gl_TessCoord.x * gl_in[1].gl_Position +
+					gl_TessCoord.x * gl_in[2].gl_Position);
+
 	// gl_TessCoord -> barycentric (3 elements)
+	//gl_TessCoord[1]
 	// element 0
 	// element 1
 	// element 2

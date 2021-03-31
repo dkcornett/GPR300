@@ -47,8 +47,8 @@ layout (line_strip, max_vertices = MAX_VERTICES) out;
 
 in vbVertexData {
 	mat4 vTangentBasis_view;
-	vec4 vTexcoord_atlas;
-} vVertextData[];
+	vec4 vTexCoord_atlas;
+} vVertexData[];
 
 out vec4 vColor;
 
@@ -93,5 +93,5 @@ void drawVertexTangents()
 void main()
 {
 	drawWireframe();
-	drawVertexTangents();
+//	drawVertexTangents();
 }

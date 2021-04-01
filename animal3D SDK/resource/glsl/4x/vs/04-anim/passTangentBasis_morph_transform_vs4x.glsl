@@ -22,6 +22,11 @@
 	Calculate and pass morphed tangent basis.
 */
 
+/*
+ Dianna Cornett and Alex Jaeger's project 4
+ edited in class with Dan's instruction 4/1/2021
+*/
+
 #version 450
 
 #define MAX_OBJECTS 128
@@ -34,11 +39,21 @@
 //		(hint: results can be stored in local variables named after the 
 //		complete tangent basis attributes provided before any changes)
 
+/*
 layout (location = 0) in vec4 aPosition;
 layout (location = 2) in vec3 aNormal;
 layout (location = 8) in vec4 aTexcoord;
 layout (location = 10) in vec3 aTangent;
 layout (location = 11) in vec3 aBitangent;
+*/
+
+// single morph target: position, normal, tangent
+//	-> we can have 5 targets: 15 total attributes/ 3 per target
+//	-> leftover attribute: the texcoord!
+
+// not morph target: texcoord, bitangent
+//	-> texcoord is common attribute
+//	-> use math to get the bitangent out of normal and tangent, (normal x tangent)
 
 struct sModelMatrixStack
 {
@@ -70,6 +85,12 @@ void main()
 {
 	// DUMMY OUTPUT: directly assign input position to output position
 	//gl_Position = aPosition;
+
+	vec4 aPosition;
+	vec3 aTangent, aBitangent, aNormal;			//morphable things need read in
+
+	//testing: copy first morph target
+
 	
 	sModelMatrixStack t = uModelMatrixStack[uIndex];
 	

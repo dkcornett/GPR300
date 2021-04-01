@@ -63,8 +63,28 @@ vec3 calcParallaxCoord(in vec3 coord, in vec3 viewVec, const int steps)
 	// ****TO-DO:
 	//	-> step along view vector until intersecting height map
 	//	-> determine precise intersection point, return resulting coordinate
-	//
-	//used https://learnopengl.com/Advanced-Lighting/Parallax-Mapping for help writing this
+	// used https://learnopengl.com/Advanced-Lighting/Parallax-Mapping write this
+//	vec3 currentCoord =  coord;
+//	vec3 P = viewVec * uSize; 
+//    vec3 deltaCoords = P / steps;
+//
+//	float currentDepthMap = texture(uTex_dm, currentCoord.xy).r;
+//	float currentLayerDepth = 0.0;
+//
+//	while (currentLayerDepth < currentDepthMap)
+//	{
+//		currentCoord -= deltaCoords;
+//		currentDepthMap = texture(uTex_dm, currentCoord.xy).r;
+//		currentLayerDepth += (1 / steps);
+//	}
+//
+//	vec3 previousCoord = currentCoord + deltaCoords;
+//	float afterDepth = currentDepthMap - currentLayerDepth;
+//	float beforeDepth = texture(uTex_dm, previousCoord.xy).r - currentLayerDepth + (1 / steps);
+//	float weight = afterDepth / (afterDepth - beforeDepth);
+//	coord = previousCoord * weight + currentCoord * (1.0 - weight);
+
+	
 
 	// done
 	return coord;
@@ -92,7 +112,7 @@ void main()
 	//		an efficient way of representing the required matrix operation)
 	// tangent-space view vector
 	mat3 TBN = mat3 (tan_view, bit_view, nrm_view);
-//	vec3 N_ts = DESERIALIZE (texture2D (normalMap, tc).rgb);
+	//vec3 N_ts = normalize(texture2D (uTex_nm, tc).rgb);
 	vec3 viewVec_tan = vec3(
 		0.0,
 		0.0,

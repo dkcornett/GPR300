@@ -28,7 +28,7 @@
 
 in vbVertexData {
 	mat4 vTangentBasis_view;
-	vec4 vTexCoord_atlas;
+	vec4 vTexcoord_atlas;
 };
 
 struct sPointLight
@@ -63,28 +63,31 @@ vec3 calcParallaxCoord(in vec3 coord, in vec3 viewVec, const int steps)
 	// ****TO-DO:
 	//	-> step along view vector until intersecting height map
 	//	-> determine precise intersection point, return resulting coordinate
-	// used https://learnopengl.com/Advanced-Lighting/Parallax-Mapping write this
-//	vec3 currentCoord =  coord;
-//	vec3 P = viewVec * uSize; 
-//    vec3 deltaCoords = P / steps;
-//
-//	float currentDepthMap = texture(uTex_dm, currentCoord.xy).r;
-//	float currentLayerDepth = 0.0;
-//
-//	while (currentLayerDepth < currentDepthMap)
-//	{
-//		currentCoord -= deltaCoords;
-//		currentDepthMap = texture(uTex_dm, currentCoord.xy).r;
-//		currentLayerDepth += (1 / steps);
-//	}
-//
-//	vec3 previousCoord = currentCoord + deltaCoords;
-//	float afterDepth = currentDepthMap - currentLayerDepth;
-//	float beforeDepth = texture(uTex_dm, previousCoord.xy).r - currentLayerDepth + (1 / steps);
-//	float weight = afterDepth / (afterDepth - beforeDepth);
-//	coord = previousCoord * weight + currentCoord * (1.0 - weight);
 
-	
+	//Get the start and ending points, then loop through steps
+	//Interpolate between start and end, use to sample text pos 
+	//if sample.z < samplehighet then we have the correct coord 
+	//interp between that and last hit
+
+	coord.z = 1;
+	vec3 start = coord;
+	start.z = 1;
+	vec3 end = coord - ((viewVec / viewVec.z) * uSize);
+	end.z = 0;
+	float n = float(steps);
+	float dt = 1 / n;
+
+	for (int i = 0; i < steps; i++)
+	{
+		float a = dt * i;
+		vec3 b = mix(start, end, a);
+		float height = texture(uTex_hm, b.xy).r;
+
+		if (b.z < height)
+		{
+			return b;
+		}
+	}
 
 	// done
 	return coord;
@@ -106,24 +109,17 @@ void main()
 	// view-space view vector
 	vec4 viewVec = normalize(kEyePos - pos_view);
 	
-	// ****TO-DO: 
+	// ****DONE: 
 	//	-> convert view vector into tangent space
 	//		(hint: the above TBN bases convert tangent to view, figure out 
 	//		an efficient way of representing the required matrix operation)
 	// tangent-space view vector
-	mat3 TBN = mat3 (tan_view, bit_view, nrm_view);
-	//vec3 N_ts = normalize(texture2D (uTex_nm, tc).rgb);
-	//vec3 N_ts = DESERIALIZE(texture2D (normalMap, tc).rgb);
-	vec3 viewVec_tan = vec3(
-		0.0,
-		0.0,
-		0.0
-	);
-
+	mat4 TBN = transpose(mat4 (tan_view, bit_view, nrm_view, vec4(0, 0, 0, 1)));
+	vec3 viewVec_tan = (TBN * viewVec).xyz;
 	
 	
 	// parallax occlusion mapping
-	vec3 texcoord = vec3(vTexCoord_atlas.xy, uSize);
+	vec3 texcoord = vec3(vTexcoord_atlas.xy, uSize);
 	texcoord = calcParallaxCoord(texcoord, viewVec_tan, 256);
 	
 	// read and calculate view normal
@@ -150,5 +146,5 @@ void main()
 	rtFragNormal = vec4(nrm_view.xyz * 0.5 + 0.5, 1.0);
 	
 	// DEBUGGING
-	//rtFragColor.rgb = texcoord;
+	//rtFragColor.rgb = viewVec_tan;
 }

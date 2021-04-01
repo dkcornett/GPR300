@@ -28,7 +28,7 @@
 
 in vbVertexData {
 	mat4 vTangentBasis_view;
-	vec4 vTexcoord_atlas;
+	vec4 vTexCoord_atlas;
 };
 
 struct sPointLight
@@ -113,6 +113,7 @@ void main()
 	// tangent-space view vector
 	mat3 TBN = mat3 (tan_view, bit_view, nrm_view);
 	//vec3 N_ts = normalize(texture2D (uTex_nm, tc).rgb);
+	//vec3 N_ts = DESERIALIZE(texture2D (normalMap, tc).rgb);
 	vec3 viewVec_tan = vec3(
 		0.0,
 		0.0,
@@ -122,7 +123,7 @@ void main()
 	
 	
 	// parallax occlusion mapping
-	vec3 texcoord = vec3(vTexcoord_atlas.xy, uSize);
+	vec3 texcoord = vec3(vTexCoord_atlas.xy, uSize);
 	texcoord = calcParallaxCoord(texcoord, viewVec_tan, 256);
 	
 	// read and calculate view normal

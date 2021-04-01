@@ -35,4 +35,5 @@ void main()
 {
 	gl_TessLevelOuter[0] = uLevelOuter[0];		//number of lines	//so we're just fixing tesselation to go on through
 	gl_TessLevelOuter[1] = uLevelOuter[1];		//subdivisions 
+
 }

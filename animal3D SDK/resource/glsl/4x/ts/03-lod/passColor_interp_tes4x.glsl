@@ -24,8 +24,8 @@
 
 #version 450
 
-// ****TO-DO: WIP?
-//	-> declare uniform block for spline waypoint and handle data
+// ****WIP:
+//	-> declare uniform block for spline waypoint and handle data		//done?
 //	-> implement spline interpolation algorithm based on scene object's path
 //	-> interpolate along curve using correct inputs and project result
 
@@ -34,7 +34,7 @@ layout (isolines, equal_spacing) in;
 uniform ubCurve
 {
 	vec4 uCurveWaypoint[32];
-	vec4 uCurveTanget[32];
+	vec4 uCurveTangent[32];
 };
 
 uniform mat4 uP;
@@ -64,9 +64,10 @@ void main()
 		u
 	);
 
+
 	gl_Position = uP * p;
 
-	vColor = vec4(0.5f, 0.05f, u, 1.0f);
 
-	
+	vColor = vec4(u, 0.05f, 0.7f, 1.0f);
+
 }

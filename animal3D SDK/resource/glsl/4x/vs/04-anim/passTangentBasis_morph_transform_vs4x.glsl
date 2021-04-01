@@ -90,7 +90,7 @@ void main()
 	vec3 aTangent, aBitangent, aNormal;			//morphable things need read in
 
 	//testing: copy first morph target
-
+	// go read the load.c and find it!
 	
 	sModelMatrixStack t = uModelMatrixStack[uIndex];
 	

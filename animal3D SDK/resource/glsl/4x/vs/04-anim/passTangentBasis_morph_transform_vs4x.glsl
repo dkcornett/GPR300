@@ -55,6 +55,18 @@ layout (location = 11) in vec3 aBitangent;
 //	-> texcoord is common attribute
 //	-> use math to get the bitangent out of normal and tangent, (normal x tangent)
 
+struct sMorphTarget
+{
+	vec4 position;
+	vec3 normal;		float nPad;
+	vec3 tangent;		float tPad;
+};
+
+layout (location = 0) in sMorphTarget aMorphTarget[5];
+// need texCoord-- where does it actually live?
+
+
+
 struct sModelMatrixStack
 {
 	mat4 modelMat;						// model matrix (object -> world)
@@ -92,13 +104,14 @@ void main()
 	//testing: copy first morph target
 	// go read the load.c and find it!
 	
+	
 	sModelMatrixStack t = uModelMatrixStack[uIndex];
 	
 	vTangentBasis_view = t.modelViewMatInverseTranspose * mat4(aTangent, 0.0, aBitangent, 0.0, aNormal, 0.0, vec4(0.0));
 	vTangentBasis_view[3] = t.modelViewMat * aPosition;
 	gl_Position = t.modelViewProjectionMat * aPosition;
 	
-	vTexcoord_atlas = t.atlasMat * aTexcoord;
+//	vTexcoord_atlas = t.atlasMat * aTexcoord;
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;

@@ -316,7 +316,7 @@ void a3animate_load(a3_DemoState const* demoState, a3_DemoMode4_Animate* demoMod
 		a3_SceneObjectData* spatialPose = 0;
 
 		// initialize hierarchy
-		a3_Hierarchy* hierarchy = demoMode->hierarchy_skel;
+		a3_Hierarchy* hierarchy = demoMode->hierarchy_skel;		//abstract hierarchy
 		a3hierarchyCreate(hierarchy, jointCount, 0);
 
 		// set up joint relationships

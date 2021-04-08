@@ -73,7 +73,7 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 		
 		for (j = 0;
 			j < hierarchy->numNodes;
-			++j, ++p0, ++p1, ++pBase, ++localSpaceArray)
+			++j, ++p0, ++p1, ++pBase, ++localSpaceArray)		//recommend DO FORWARD KINEMATICS FIRST
 		{
 			// testing: copy base pose
 			tmpPose = *pBase;

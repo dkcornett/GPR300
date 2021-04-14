@@ -102,9 +102,28 @@ inline int a3animate_updateSkeletonObjectSpace(a3_Hierarchy const* hierarchy,
 	{
 		// ****TO-DO: 
 		// forward kinematics
-		//a3ui32 j;
-		//a3i32 jp;
+		a3ui32 j;
+		a3i32 jp;
+		
+		//loop iterates through whole skeleton. referenced a3annimat_updateSkeletonRenderMats for structure
+		for (j = 0; 
+			j < hierarchy->numNodes; 
+			++j)
+		{
+			jp = hierarchy->nodes[j].parentIndex;
 
+			//from slides: if parent index is -1, this is the root node
+			// and world transform IS local transform!
+			if (jp <= -1)
+			{
+				localSpaceArray = objectSpaceArray;
+			}
+			else
+			{
+
+			}
+		}
+		
 		// done
 		return 1;
 	}

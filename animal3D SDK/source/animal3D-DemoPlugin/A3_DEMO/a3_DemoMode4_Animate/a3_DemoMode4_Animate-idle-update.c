@@ -116,11 +116,14 @@ inline int a3animate_updateSkeletonObjectSpace(a3_Hierarchy const* hierarchy,
 			// and world transform IS local transform!
 			if (jp <= -1)
 			{
-				localSpaceArray = objectSpaceArray;
+				//j.localSpaceArray = objectSpaceArray;
+				a3real4SetReal4(localSpaceArray[j].m, objectSpaceArray[j].m);
 			}
+			//otherwise, world transform is local transform times parent's transform
 			else
 			{
-
+				//j.localSpaceArray *= jp.localSpaceArray
+				a3real4SetReal4(localSpaceArray[j].m, a3real4x4Concat(localSpaceArray[j].m, localSpaceArray[jp].m));
 			}
 		}
 		

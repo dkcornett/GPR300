@@ -32,7 +32,7 @@
 #define MAX_OBJECTS 128
 
 // ****TO-DO: 
-//	-> declare morph target attributes
+//	-> declare morph target attributes: done
 //	-> declare and implement morph target interpolation algorithm
 //	-> declare interpolation time/param/keyframe uniform
 //	-> perform morph target interpolation using correct attributes
@@ -101,9 +101,10 @@ void main()
 	vec4 aPosition;
 	vec3 aTangent, aBitangent, aNormal;			//morphable things need read in
 
+
 	//testing: copy first morph target
 	// go read the load.c and find it!
-	
+
 	
 	sModelMatrixStack t = uModelMatrixStack[uIndex];
 	
@@ -111,7 +112,7 @@ void main()
 	vTangentBasis_view[3] = t.modelViewMat * aPosition;
 	gl_Position = t.modelViewProjectionMat * aPosition;
 	
-//	vTexcoord_atlas = t.atlasMat * aTexcoord;
+	vTexcoord_atlas = t.atlasMat * aTexcoord;
 
 	vVertexID = gl_VertexID;
 	vInstanceID = gl_InstanceID;

@@ -35,6 +35,9 @@
 
 #include "../_a3_demo_utilities/a3_DemoMacros.h"
 
+/*
+ Dianna Cornett and Alex Jaeger's project 5
+*/
 
 //-----------------------------------------------------------------------------
 
@@ -115,6 +118,7 @@ inline int a3animate_updateSkeletonObjectSpace(a3_Hierarchy const* hierarchy,
 {
 	if (hierarchy && objectSpaceArray && localSpaceArray)
 	{
+
 		// ****TO-DO: 
 		// forward kinematics
 		a3ui32 j;

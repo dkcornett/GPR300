@@ -23,8 +23,7 @@
 */
 
 /*
- Dianna Cornett and Alex Jaeger's project 4
- edited in class with Dan's instruction 4/1/2021
+ Dianna Cornett and Alex Jaeger's project 5
 */
 
 #version 450

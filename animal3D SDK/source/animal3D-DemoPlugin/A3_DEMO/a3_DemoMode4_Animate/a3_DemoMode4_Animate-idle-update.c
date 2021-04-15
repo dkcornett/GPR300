@@ -83,22 +83,25 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			a3real4Lerp(tmpPose.position.v, p0->position.v, p1->position.v, u);
 			a3real4Lerp(tmpPose.euler.v, p0->euler.v, p1->euler.v, u);
 			a3real4Lerp(tmpPose.scale.v, p0->scale.v, p1->scale.v, u);
-			//a3real4Lerp(tmpPose.scaleMode, p0->scaleMode, p1->scaleMode, u);
 			
 			// ****TO-DO:
 			// concatenate base pose
-			a3real4x4Add(tmpPose.position.v, pBase->position.v);
-			a3real4x4Add(tmpPose.euler.v, pBase->euler.v);
+			
+			a3real4Add(tmpPose.position.v, pBase->position.v);
+			a3real4Add(tmpPose.euler.v, pBase->euler.v);
 			a3real3MulComp(tmpPose.scale.v, pBase->scale.v);
-
-			/*a3real4x4Concat(tmpPose.position.v, pBase->position.v);
-			a3real4x4Concat(tmpPose.euler.v, pBase->euler.v);
-			a3real4x4Concat(tmpPose.scale.v, pBase->scale.v);*/
 
 			// ****TO-DO:
 			// convert to matrix
+			a3mat4 posMatrix = { tmpPose.scale.x, 0, 0, tmpPose.position.x,
+								0, tmpPose.scale.y, 0, tmpPose.position.y,
+								0, 0, tmpPose.scale.z, tmpPose.position.z,
+								0, 0, 0, 1 };
 
 
+			a3real4x4SetRotateXYZ(localSpaceArray->m, tmpPose.euler.x, tmpPose.euler.y, tmpPose.euler.z);
+			a3real4x4Concat(posMatrix.m, localSpaceArray->m);
+			
 		}
 
 		// done

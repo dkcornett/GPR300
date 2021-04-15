@@ -63,9 +63,8 @@ struct sMorphTarget
 };
 
 layout (location = 0) in sMorphTarget aMorphTarget[5];
+layout (location = 8) in vec4 aTexcoord;
 // need texCoord-- where does it actually live?
-
-
 
 struct sModelMatrixStack
 {
@@ -83,6 +82,7 @@ uniform ubTransformStack
 {
 	sModelMatrixStack uModelMatrixStack[MAX_OBJECTS];
 };
+
 uniform int uIndex;
 
 out vbVertexData {

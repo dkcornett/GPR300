@@ -76,16 +76,28 @@ inline int a3animate_updateSkeletonLocalSpace(a3_Hierarchy const* hierarchy,
 			++j, ++p0, ++p1, ++pBase, ++localSpaceArray)		//recommend DO FORWARD KINEMATICS FIRST
 		{
 			// testing: copy base pose
-			tmpPose = *pBase;
+			//tmpPose = *pBase;
 
 			// ****TO-DO:
 			// interpolate channels
-
+			a3real4Lerp(tmpPose.position.v, p0->position.v, p1->position.v, u);
+			a3real4Lerp(tmpPose.euler.v, p0->euler.v, p1->euler.v, u);
+			a3real4Lerp(tmpPose.scale.v, p0->scale.v, p1->scale.v, u);
+			//a3real4Lerp(tmpPose.scaleMode, p0->scaleMode, p1->scaleMode, u);
+			
 			// ****TO-DO:
 			// concatenate base pose
+			a3real4x4Add(tmpPose.position.v, pBase->position.v);
+			a3real4x4Add(tmpPose.euler.v, pBase->euler.v);
+			a3real3MulComp(tmpPose.scale.v, pBase->scale.v);
+
+			/*a3real4x4Concat(tmpPose.position.v, pBase->position.v);
+			a3real4x4Concat(tmpPose.euler.v, pBase->euler.v);
+			a3real4x4Concat(tmpPose.scale.v, pBase->scale.v);*/
 
 			// ****TO-DO:
 			// convert to matrix
+
 
 		}
 
@@ -116,14 +128,15 @@ inline int a3animate_updateSkeletonObjectSpace(a3_Hierarchy const* hierarchy,
 			// and world transform IS local transform!
 			if (jp <= -1)
 			{
-				//j.localSpaceArray = objectSpaceArray;
-				a3real4SetReal4(localSpaceArray[j].m, objectSpaceArray[j].m);
+				//j.localSpaceArray = objectSpaceArray
+				a3real4x4SetReal4x4(objectSpaceArray[j].m, localSpaceArray[j].m);
 			}
 			//otherwise, world transform is local transform times parent's transform
 			else
 			{
 				//j.localSpaceArray *= jp.localSpaceArray
-				a3real4SetReal4(localSpaceArray[j].m, a3real4x4Concat(localSpaceArray[j].m, localSpaceArray[jp].m));
+				a3mat4 nodeTransform;
+				a3real4x4SetReal4x4(objectSpaceArray[j].m, a3real4x4Product(nodeTransform.m, objectSpaceArray[jp].m, localSpaceArray[j].m));
 			}
 		}
 		

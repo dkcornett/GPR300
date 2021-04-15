@@ -38,6 +38,7 @@ uniform ubTransformMVP {
 	mat4 uMVP[MAX_INSTANCES];
 };
 
+
 uniform vec4 uColor0[MAX_COLORS];
 
 out vec4 vColor;

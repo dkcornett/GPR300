@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1619549816 source:/home/itztwigz/OpenGLFramework/Display.cpp
+	"Display.h"
+	<GL/glew.h>
+	<iostream>
+
+1619482000 /home/itztwigz/OpenGLFramework/Display.h
+	<string>
+	<SDL2/SDL.h>
+
+1619556718 source:/home/itztwigz/OpenGLFramework/main.cpp
+	"Display.h"
+	"Shader.h"
+	<GL/glew.h>
+
+1619482000 /home/itztwigz/OpenGLFramework//Display.h
+	<string>
+	<SDL2/SDL.h>
+
+1619552633 /home/itztwigz/OpenGLFramework//Shader.h
+	<string>
+	<iostream>
+	<fstream>
+	<GL/glew.h>
+
+1619498976 source:/home/itztwigz/OpenGLFramework/Shader.cpp
+	"Shader.h"
+
+1619556896 /home/itztwigz/OpenGLFramework/Shader.h
+	<string>
+	<iostream>
+	<fstream>
+	<GL/glew.h>
+

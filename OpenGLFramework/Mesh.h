@@ -12,13 +12,11 @@ class Mesh
 
         void drawMesh();
 
-    protected:
-
     private:
         Mesh(const Mesh& other) {};
         void operator=(const Mesh& other) {};
 
-        enum
+        enum meshEnum
         {
             POSITION_VB,
             NUM_BUFFER

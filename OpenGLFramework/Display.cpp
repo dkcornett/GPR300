@@ -22,7 +22,7 @@ Display::Display(int w, int h, const std::string& title)
     GLenum status = glewInit();
     if (status != GLEW_OK)
     {
-       std::cerr << "Glew failed to init!\n";
+       std::cerr << "Error: Glew failed to init!\n";
     }
 
     mIsDisplayClosed = false;

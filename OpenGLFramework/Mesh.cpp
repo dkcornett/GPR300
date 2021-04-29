@@ -5,6 +5,7 @@ Mesh::Mesh(Vertex* vertices, unsigned numVert)
     mDrawCount = numVert;
 
     glGenVertexArrays(1, &mVertexArray);
+
     glBindVertexArray(mVertexArray); //Bind
 
     glGenBuffers(NUM_BUFFER, mVertexBuffer);

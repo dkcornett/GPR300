@@ -1,8 +1,8 @@
 #include "Vertex.h"
 
-Vertex::Vertex(glm::vec3& pos)
+Vertex::Vertex(const glm::vec3& pos)
 {
-    mPos = pos;
+    this->mPos = pos;
 }
 
 Vertex::~Vertex()

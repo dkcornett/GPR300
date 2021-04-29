@@ -6,14 +6,10 @@
 class Vertex
 {
     public:
-        Vertex(glm::vec3& pos);
+        Vertex(const glm::vec3& pos);
         virtual ~Vertex();
 
-    protected:
-
     private:
-        Vertex(const Vertex& other) {};
-        void operator=(const Vertex& other) {};
 
         glm::vec3 mPos;
 };

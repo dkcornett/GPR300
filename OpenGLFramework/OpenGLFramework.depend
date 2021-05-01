@@ -41,11 +41,12 @@
 	<string>
 	<SDL2/SDL.h>
 
-1619833552 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/main.cpp
+1619906217 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/main.cpp
 	"Display.h"
 	"Shader.h"
 	"Vertex.h"
 	"Mesh.h"
+	"Texture.h"
 	<GL/glew.h>
 
 1619556896 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Shader.h
@@ -70,4 +71,24 @@
 
 1619832717 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Vertex.cpp
 	"Vertex.h"
+
+1418909075 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/stb_image.c
+	"stb_image.h"
+	<math.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<assert.h>
+	<stdarg.h>
+
+1418909075 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/stb_image.h
+	<stdio.h>
+
+1619905799 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Texture.h
+	<string>
+	<GL/glew.h>
+	<assert.h>
+	<iostream>
+	"stb_image.h"
 

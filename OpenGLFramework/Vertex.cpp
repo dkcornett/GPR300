@@ -2,7 +2,7 @@
 
 Vertex::Vertex(const glm::vec3& pos)
 {
-    this->mPos = pos;
+    mPos = pos;
 }
 
 Vertex::~Vertex()

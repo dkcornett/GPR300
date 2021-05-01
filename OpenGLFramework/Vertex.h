@@ -7,11 +7,11 @@ class Vertex
 {
     public:
         Vertex(const glm::vec3& pos);
-        virtual ~Vertex();
+        ~Vertex();
 
     private:
-
         glm::vec3 mPos;
+
 };
 
 #endif // VERTEX_H

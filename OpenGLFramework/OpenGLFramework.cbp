@@ -41,8 +41,12 @@
 		</Linker>
 		<Unit filename="Display.cpp" />
 		<Unit filename="Display.h" />
+		<Unit filename="Mesh.cpp" />
+		<Unit filename="Mesh.h" />
 		<Unit filename="Shader.cpp" />
 		<Unit filename="Shader.h" />
+		<Unit filename="Vertex.cpp" />
+		<Unit filename="Vertex.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

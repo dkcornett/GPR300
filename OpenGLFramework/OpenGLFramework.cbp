@@ -45,9 +45,15 @@
 		<Unit filename="Mesh.h" />
 		<Unit filename="Shader.cpp" />
 		<Unit filename="Shader.h" />
+		<Unit filename="Texture.cpp" />
+		<Unit filename="Texture.h" />
 		<Unit filename="Vertex.cpp" />
 		<Unit filename="Vertex.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="stb_image.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stb_image.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

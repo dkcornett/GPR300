@@ -47,6 +47,8 @@
 		<Unit filename="Shader.h" />
 		<Unit filename="Texture.cpp" />
 		<Unit filename="Texture.h" />
+		<Unit filename="Transformation.cpp" />
+		<Unit filename="Transformation.h" />
 		<Unit filename="Vertex.cpp" />
 		<Unit filename="Vertex.h" />
 		<Unit filename="main.cpp" />

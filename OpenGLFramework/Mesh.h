@@ -17,7 +17,7 @@ class Mesh
         Mesh(const Mesh& other) {};
         void operator=(const Mesh& other) {};
 
-        enum meshEnum
+        enum vertexBufferEnum
         {
             POSITION_VB,
             TEXCOORD_VB,

@@ -3,6 +3,7 @@
 #include "Vertex.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Transformation.h"
 #include <GL/glew.h>
 
 int main()
@@ -14,13 +15,15 @@ int main()
 
     Mesh testMesh(testVertices, sizeof(testVertices) / sizeof(testVertices[0]));
     Shader testShader("shaderFolder/basicShader");
-    Texture testTexture("textureFolder/dan.jpg");
+    Texture testTexture("textureFolder/dan.png");
+    Transformation testTransform;
 
     while (!testDisplay.isClosed())
     {
         testDisplay.clearDisplay(0.0, 0.0, 1.0, 1.0);
         testShader.Bind();
         testTexture.BindTexture(0);
+        testShader.UpdateShader(testTransform);
         testMesh.drawMesh();
         testDisplay.updateDisplay();
     }

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <GL/glew.h>
+#include "Transformation.h"
 
 class Shader
 {
@@ -13,6 +14,7 @@ class Shader
         virtual ~Shader();
 
         void Bind();
+        void UpdateShader(const Transformation& transformation);
 
     private:
 
@@ -26,9 +28,16 @@ class Shader
     void checkForProgramError(GLuint program, GLuint flag, const std::string& errorMsg);
     void checkForShaderError(GLuint shader, GLuint flag, const std::string& errorMsg);
 
+    enum uniformEnum
+    {
+        TRANSFROM_UNIFORM,
+        UNIFORM_NUM
+    };
+
     static const unsigned NUM_SHADERS = 2; //vertex, frag., geometry shaders
     GLuint mProgram; //for GL Keeping track of the shader program
     GLuint mShaders[NUM_SHADERS];
+    GLuint mUniforms[UNIFORM_NUM];
 };
 
 #endif // SHADER_H

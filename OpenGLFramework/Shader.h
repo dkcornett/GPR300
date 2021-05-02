@@ -6,6 +6,7 @@
 #include <fstream>
 #include <GL/glew.h>
 #include "Transformation.h"
+#include "Camera.h"
 
 class Shader
 {
@@ -14,7 +15,8 @@ class Shader
         virtual ~Shader();
 
         void Bind();
-        void UpdateShader(const Transformation& transformation);
+        void UpdateShader(const Transformation& transformation
+                        , const Camera& camera);
 
     private:
 

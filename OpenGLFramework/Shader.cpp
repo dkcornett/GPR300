@@ -121,8 +121,9 @@ void Shader::checkForShaderError(GLuint shader, GLuint flag, const std::string& 
     }
 }
 
-void Shader::UpdateShader(const Transformation& transformation)
+void Shader::UpdateShader(const Transformation& transformation
+                        , const Camera& camera)
 {
-    glm::mat4 modelMat = transformation.getModel();
+    glm::mat4 modelMat = camera.getVeiwProjection() * transformation.getModel();
     glUniformMatrix4fv(mUniforms[TRANSFROM_UNIFORM], 1, GL_FALSE, &modelMat[0][0]);
 }

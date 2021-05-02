@@ -24,8 +24,6 @@ class Transformation
         inline void setRot(const glm::vec3& rot) { mRot = rot; };
         inline void setScale(const glm::vec3& scale) { mScale = scale; };
 
-    protected:
-
     private:
     glm::vec3 mPos;
     glm::vec3 mRot;

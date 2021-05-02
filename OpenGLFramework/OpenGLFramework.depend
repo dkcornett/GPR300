@@ -49,12 +49,13 @@
 	"Texture.h"
 	<GL/glew.h>
 
-1619976751 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Shader.h
+1619983832 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Shader.h
 	<string>
 	<iostream>
 	<fstream>
 	<GL/glew.h>
 	"Transformation.h"
+	"Camera.h"
 
 1619938611 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Vertex.h
 	<glm/glm.hpp>
@@ -64,7 +65,7 @@
 	<vector>
 	<GL/glew.h>
 
-1619976784 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Shader.cpp
+1619983993 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Shader.cpp
 	"Shader.h"
 
 1619939244 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Mesh.cpp
@@ -164,7 +165,14 @@
 1619975549 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Transformation.cpp
 	"Transformation.h"
 
-1619975515 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Transformation.h
+1619981417 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Transformation.h
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+
+1619984110 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Camera.cpp
+	"Camera.h"
+
+1619984150 /home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Camera.h
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 

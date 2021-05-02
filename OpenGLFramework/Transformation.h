@@ -20,11 +20,9 @@ class Transformation
         inline glm::vec3& getScale() { return mScale; };
         glm::mat4 getModel() const;
 
-        inline void setPos(glm::vec3& pos) { mPos = pos; };
-        inline void setRot(glm::vec3& rot) { mRot = rot; };
-        inline void setScale(glm::vec3& scale) { mScale = scale; };
-
-    protected:
+        inline void setPos(const glm::vec3& pos) { mPos = pos; };
+        inline void setRot(const glm::vec3& rot) { mRot = rot; };
+        inline void setScale(const glm::vec3& scale) { mScale = scale; };
 
     private:
     glm::vec3 mPos;

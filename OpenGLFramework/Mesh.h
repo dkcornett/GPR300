@@ -2,6 +2,7 @@
 #define MESH_H
 
 #include "Vertex.h"
+#include <vector>
 #include <GL/glew.h>
 
 class Mesh
@@ -19,6 +20,7 @@ class Mesh
         enum meshEnum
         {
             POSITION_VB,
+            TEXCOORD_VB,
             NUM_BUFFER
         };
 

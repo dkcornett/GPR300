@@ -3,6 +3,8 @@
 
 uniform sampler2D textureSampler;
 
+varying vec2 texcoord0;
+
 void main()
 {
 //referenced this for texture conversion in version 120:
@@ -11,8 +13,8 @@ void main()
 //http://www.lighthouse3d.com/tutorials/glsl-12-tutorial/simple-texture/
 
 
-    vec4 texColors = texture2D(textureSampler, gl_TexCoord[0].st);
+  vec4 texColors = texture2D(textureSampler, texcoord0);
 
-  //  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-    gl_FragColor = texColors;
+  //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  gl_FragColor = texColors;
 }

@@ -15,7 +15,7 @@ int main()
 
     Mesh testMesh(testVertices, sizeof(testVertices) / sizeof(testVertices[0]));
     Shader testShader("shaderFolder/basicShader");
-    Texture testTexture("textureFolder/dan.png");
+    Texture testTexture("textureFolder/dan.jpg");
     Transformation testTransform;
 
     while (!testDisplay.isClosed())

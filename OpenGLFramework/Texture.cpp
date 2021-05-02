@@ -2,9 +2,9 @@
 
 Texture::Texture(const std::string filename)
 {
-    unsigned imageW;
-    unsigned imageH;
-    unsigned numImageComp;
+    int imageW;         //unsigned imageW;
+    int imageH;         //unsigned imageH;
+    int numImageComp;   //unsigned numImageComp;
     unsigned char* imageData = stbi_load(filename.c_str(), &imageW, &imageH
                                 , &numImageComp, 4); //begin
 
@@ -12,6 +12,8 @@ Texture::Texture(const std::string filename)
     {
         std::cerr << "Error: Texture " << filename << " failed to load!\n";
     }
+
+
 
     //Generate and bind new texture
     glGenTextures(1, &mTexture);
@@ -22,8 +24,8 @@ Texture::Texture(const std::string filename)
     glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     //Control interpolating and extrapolating the texture
-    glTextureParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTextureParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
     //Create Texture image
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageW, imageH, 0
@@ -33,10 +35,10 @@ Texture::Texture(const std::string filename)
 
 Texture::~Texture()
 {
-    glDeleteTexture(1, &mTexture);
+    glDeleteTextures(1, &mTexture);
 }
 
-void Texture::BindTexture(unsigned texUnit)
+void Texture::BindTexture(int texUnit)
 {
     //Range is 0 to 31, make sure we aren't outside
     assert(texUnit >= 0 && texUnit <= 31);

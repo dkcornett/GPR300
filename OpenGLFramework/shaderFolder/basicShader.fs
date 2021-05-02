@@ -1,7 +1,18 @@
 #version 120
 
 
+uniform sampler2D textureSampler;
+
 void main()
 {
-     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+//referenced this for texture conversion in version 120:
+//https://stackoverflow.com/questions/58063564/send-a-big-matrix-to-a-fragment-shader-in-glsl-version-120
+//and here
+//http://www.lighthouse3d.com/tutorials/glsl-12-tutorial/simple-texture/
+
+
+    vec4 texColors = texture2D(textureSampler, gl_TexCoord[0].st);
+
+  //  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    gl_FragColor = texColors;
 }

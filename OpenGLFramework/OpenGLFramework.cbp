@@ -50,10 +50,13 @@
 		<Unit filename="Vertex.cpp" />
 		<Unit filename="Vertex.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="shaderFolder/basicShader.fs" />
+		<Unit filename="shaderFolder/basicShader.vs" />
 		<Unit filename="stb_image.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="stb_image.h" />
+		<Unit filename="textureFolder/dan.png" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -13,7 +13,7 @@ class Texture
         Texture(const std::string filename);
         virtual ~Texture();
 
-        void BindTexture(unsigned texUnit);
+        void BindTexture(int texUnit);
 
     private:
         Texture(const Texture& other) {};

@@ -15,17 +15,26 @@ int main()
 
     Mesh testMesh(testVertices, sizeof(testVertices) / sizeof(testVertices[0]));
     Shader testShader("shaderFolder/basicShader");
-    Texture testTexture("textureFolder/dan.png");
+    Texture testTexture("textureFolder/bricks.jpg");
     Transformation testTransform;
+
+    float counter = 0.0f;
 
     while (!testDisplay.isClosed())
     {
         testDisplay.clearDisplay(0.0, 0.0, 1.0, 1.0);
+
+        testTransform.getPos().x = sinf(counter); //move left and right
+        testTransform.getRot().z = counter * 50; //rotate
+        testTransform.setScale(glm::vec3(cosf(counter)
+                                , cosf(counter), cosf(counter))); //scale up and down
+
         testShader.Bind();
         testTexture.BindTexture(0);
         testShader.UpdateShader(testTransform);
         testMesh.drawMesh();
         testDisplay.updateDisplay();
+        counter += 0.0015f; //CHANGE TO DELTA TIME
     }
 
     return 0;

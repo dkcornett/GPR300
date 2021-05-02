@@ -25,7 +25,7 @@ Shader::Shader(const std::string& shaderFileName)
     glValidateProgram(mProgram);
     checkForProgramError(mProgram, GL_VALIDATE_STATUS, "Error: Program is invalid!");
 
-    mUniforms[TRANSFROM_UNIFORM] = glGetUniformLocation(mProgram, "Transform");
+    mUniforms[TRANSFROM_UNIFORM] = glGetUniformLocation(mProgram, "transform");
 }
 
 Shader::~Shader()

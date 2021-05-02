@@ -60,7 +60,8 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="stb_image.h" />
-		<Unit filename="textureFolder/dan.png" />
+		<Unit filename="textureFolder/bricks.jpg" />
+		<Unit filename="textureFolder/dan.jpg" />
 		<Extensions>
 			<code_completion />
 			<debugger />

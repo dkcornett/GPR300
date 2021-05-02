@@ -19,7 +19,7 @@ int main()
 
     Mesh testMesh(testVertices, sizeof(testVertices) / sizeof(testVertices[0]));
     Shader testShader("shaderFolder/basicShader");
-    Texture testTexture("textureFolder/bricks.jpg");
+    Texture testTexture("textureFolder/bricks.png");
     Camera testCamera(glm::vec3(0, 0, -2), 70.0f
                       , (float)WINDOW_W / (float)WINDOW_H, 0.01f, 1000.0f);
     Transformation testTransform;

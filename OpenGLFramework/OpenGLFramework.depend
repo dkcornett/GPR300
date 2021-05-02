@@ -114,26 +114,28 @@
 1619966354 /home/dianna/Source/Repos/GPR300/OpenGLFramework/Vertex.h
 	<glm/glm.hpp>
 
-1619966354 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/Shader.cpp
+1619988057 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/Shader.cpp
 	"Shader.h"
 
-1619966354 /home/dianna/Source/Repos/GPR300/OpenGLFramework/Shader.h
+1619988057 /home/dianna/Source/Repos/GPR300/OpenGLFramework/Shader.h
 	<string>
 	<iostream>
 	<fstream>
 	<GL/glew.h>
 	"Transformation.h"
+	"Camera.h"
 
 1619966354 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/Vertex.cpp
 	"Vertex.h"
 
-1619987611 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/main.cpp
+1619991220 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/main.cpp
 	"Display.h"
 	"Shader.h"
 	"Vertex.h"
 	"Mesh.h"
 	"Texture.h"
 	"Transformation.h"
+	"Camera.h"
 	<GL/glew.h>
 
 1619916638 /home/dianna/Source/Repos/GPR300/OpenGLFramework/Texture.h
@@ -156,7 +158,7 @@
 	<assert.h>
 	<stdarg.h>
 
-1619966354 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/Texture.cpp
+1619991936 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/Texture.cpp
 	"Texture.h"
 
 1619938759 source:/home/itztwigz/Desktop/GraphicsRepo/GPR300/OpenGLFramework/Texture.cpp
@@ -176,10 +178,17 @@
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 
-1619966354 /home/dianna/Source/Repos/GPR300/OpenGLFramework/Transformation.h
+1619988057 /home/dianna/Source/Repos/GPR300/OpenGLFramework/Transformation.h
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 
 1619966354 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/Transformation.cpp
 	"Transformation.h"
+
+1619988057 /home/dianna/Source/Repos/GPR300/OpenGLFramework/Camera.h
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+
+1619988057 source:/home/dianna/Source/Repos/GPR300/OpenGLFramework/Camera.cpp
+	"Camera.h"
 

@@ -1,18 +1,20 @@
 #version 120
 
-attribute vec3 pos;
-attribute vec2 texcoord;
+attribute vec3 coord;
+attribute vec2 texCoord;
 
-varying vec2 texcoord0;
+varying vec2 UV;
 
 uniform mat4 transform;
 //uniform mat4 MVP;
 
 void main()
 {
-    //gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    vec4 texPos= gl_Vertex;
+    gl_Position = transform * texPos;
+    UV = texCoord;
 
 
-    gl_Position = transform * vec4(pos, 1.0);
-    texcoord0 = texcoord;
+   // texcoord0 = texCoord;
 }

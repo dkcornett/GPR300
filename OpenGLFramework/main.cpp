@@ -32,9 +32,9 @@ int main()
 
         testTransform.getPos().x = sinf(counter); //move left and right
         testTransform.getPos().z = cosf(counter); //move closer and farther from cam
-        testTransform.getRot().x = counter * 50; //rotate x
-        testTransform.getRot().y = counter * 50; //rotate y
-        testTransform.getRot().z = counter * 50; //rotate z
+        testTransform.getRot().x = counter; //rotate x
+        testTransform.getRot().y = counter; //rotate y
+        testTransform.getRot().z = counter; //rotate z
         //testTransform.setScale(glm::vec3(cosf(counter)
         //                        , cosf(counter), cosf(counter))); //scale up and down
 
@@ -43,7 +43,7 @@ int main()
         testShader.UpdateShader(testTransform, testCamera);
         testMesh.drawMesh();
         testDisplay.updateDisplay();
-        counter += 0.0015f; //CHANGE TO DELTA TIME
+        counter += 0.0015f;
     }
 
     return 0;

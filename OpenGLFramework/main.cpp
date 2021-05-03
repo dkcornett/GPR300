@@ -17,10 +17,14 @@ int main()
                            , Vertex(glm::vec3(0, 0.5, 0), glm::vec2(0.5, 1.0))
                            , Vertex(glm::vec3(0.5, -0.5, 0), glm::vec2(1.0, 0.0)), };
 
-    Mesh testMesh(testVertices, sizeof(testVertices) / sizeof(testVertices[0]));
+    unsigned index[] = { 0, 1, 2};
+
+    Mesh testMesh(testVertices, sizeof(testVertices) / sizeof(testVertices[0])
+                , index, sizeof(index) / sizeof(index[0]));
+    Mesh testMesh2("modelFolder/monkey3.obj");
     Shader testShader("shaderFolder/basicShader");
     Texture testTexture("textureFolder/bricks.jpg");
-    Camera testCamera(glm::vec3(0, 0, -2), 70.0f
+    Camera testCamera(glm::vec3(0, 0, -3), 70.0f
                       , (float)WINDOW_W / (float)WINDOW_H, 0.01f, 1000.0f);
     Transformation testTransform;
 
@@ -41,7 +45,7 @@ int main()
         testShader.Bind();
         testTexture.BindTexture(0);
         testShader.UpdateShader(testTransform, testCamera);
-        testMesh.drawMesh();
+        testMesh2.drawMesh();
         testDisplay.updateDisplay();
         counter += 0.0015f;
     }

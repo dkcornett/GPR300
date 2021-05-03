@@ -4,11 +4,15 @@
 #include "Vertex.h"
 #include <vector>
 #include <GL/glew.h>
+#include <obj_loader.h> //link to file
 
 class Mesh
 {
     public:
-        Mesh(Vertex* vertices, unsigned numVert);
+        Mesh(Vertex* vertices, unsigned numVert, unsigned* index
+            , unsigned numIndex);
+        Mesh(const std::string& filename);
+
         virtual ~Mesh();
 
         void drawMesh();
@@ -17,10 +21,13 @@ class Mesh
         Mesh(const Mesh& other) {};
         void operator=(const Mesh& other) {};
 
+        void InitMesh(const IndexedModel& model);
+
         enum vertexBufferEnum
         {
             POSITION_VB,
             TEXCOORD_VB,
+            INDEX_VB,
             NUM_BUFFER
         };
 

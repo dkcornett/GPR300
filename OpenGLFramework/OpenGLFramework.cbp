@@ -54,6 +54,8 @@
 		<Unit filename="Vertex.cpp" />
 		<Unit filename="Vertex.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="obj_loader.cpp" />
+		<Unit filename="obj_loader.h" />
 		<Unit filename="shaderFolder/basicShader.fs" />
 		<Unit filename="shaderFolder/basicShader.vs" />
 		<Unit filename="stb_image.c">

@@ -1,40 +1,59 @@
 #include "Mesh.h"
 
-Mesh::Mesh(Vertex* vertices, unsigned numVert)
+Mesh::Mesh(Vertex* vertices, unsigned numVert, unsigned* index
+            , unsigned numIndex)
 {
-    mDrawCount = numVert;
-
-    glGenVertexArrays(1, &mVertexArray);
-
-    glBindVertexArray(mVertexArray);
-
-    std::vector<glm::vec3> posVec;
-    posVec.reserve(numVert);
-    std::vector<glm::vec2> texcoordVec;
-    texcoordVec.reserve(numVert);
+    IndexedModel model;
 
     for (int i = 0; i < numVert; ++i)
     {
-        posVec.push_back(*vertices[i].getPos());
-        texcoordVec.push_back(*vertices[i].getTexcoord());
+        model.positions.push_back(*vertices[i].getPos());
+        model.texCoords.push_back(*vertices[i].getTexcoord());
     }
+
+    for (int i = 0; i < model.indices.size(); ++i)
+    {
+        model.indices.push_back(index[i]);
+    }
+
+    InitMesh(model);
+}
+
+Mesh::Mesh(const std::string& filename)
+{
+    IndexedModel model = OBJModel(filename).ToIndexedModel();
+    InitMesh(model);
+}
+
+void Mesh::InitMesh(const IndexedModel& model)
+{
+    mDrawCount = model.indices.size();
+    glGenVertexArrays(1, &mVertexArray);
+
+    glBindVertexArray(mVertexArray);
 
     glGenBuffers(NUM_BUFFER, mVertexBuffer);
 
     //Position Buffer
     glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer[POSITION_VB]);
-    glBufferData(GL_ARRAY_BUFFER, numVert * sizeof(posVec[0])
-                , &posVec[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, model.positions.size()
+                * sizeof(model.positions[0]), &model.positions[0]
+                , GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     //Texcoord Buffer
     glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer[TEXCOORD_VB]);
-    glBufferData(GL_ARRAY_BUFFER, numVert * sizeof(texcoordVec[0])
-                , &texcoordVec[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, model.positions.size()
+                * sizeof(model.texCoords[0])
+                , &model.texCoords[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
+    //Index Buffer
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mVertexBuffer[INDEX_VB]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, model.indices.size()
+                * sizeof(model.indices[0]), &model.indices[0], GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 }
@@ -47,6 +66,6 @@ Mesh::~Mesh()
 void Mesh::drawMesh()
 {
     glBindVertexArray(mVertexArray); //Bind
-    glDrawArrays(GL_TRIANGLES, 0, mDrawCount);
+    glDrawElements(GL_TRIANGLES, mDrawCount, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0); //Unbind
 }

@@ -12,6 +12,7 @@ Display::Display(int w, int h, const std::string& title)
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
     //Create window and context
@@ -26,6 +27,13 @@ Display::Display(int w, int h, const std::string& title)
     }
 
     mIsDisplayClosed = false;
+
+    //Enable Z-Buffer
+    glEnable(GL_DEPTH_TEST);
+
+    //Enable Back Face Culling
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
 }
 
 void Display::updateDisplay()
@@ -45,7 +53,7 @@ void Display::updateDisplay()
 void Display::clearDisplay(float r, float g, float b, float a)
 {
     glClearColor(r, g, b, a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 Display::~Display()

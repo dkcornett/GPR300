@@ -24,7 +24,7 @@ int main()
     Mesh testMesh2("modelFolder/monkey3.obj");
     Shader testShader("shaderFolder/basicShader");
     Texture testTexture("textureFolder/bricks.jpg");
-    Camera testCamera(glm::vec3(0, 0, -3), 70.0f
+    Camera testCamera(glm::vec3(0, 0, -7), 70.0f
                       , (float)WINDOW_W / (float)WINDOW_H, 0.01f, 1000.0f);
     Transformation testTransform;
 
@@ -34,11 +34,11 @@ int main()
     {
         testDisplay.clearDisplay(0.0, 0.0, 1.0, 1.0);
 
-        testTransform.getPos().x = sinf(counter); //move left and right
-        testTransform.getPos().z = cosf(counter); //move closer and farther from cam
-        testTransform.getRot().x = counter; //rotate x
-        testTransform.getRot().y = counter; //rotate y
-        testTransform.getRot().z = counter; //rotate z
+        testTransform.getPos().x = sinf(counter) * 2.5; //move left and right
+        testTransform.getPos().z = cosf(counter) * 2.5; //move closer and farther from cam
+        testTransform.getRot().x = counter * 2.5; //rotate x
+        testTransform.getRot().y = counter * 2.5; //rotate y
+        testTransform.getRot().z = counter * 2.5; //rotate z
         //testTransform.setScale(glm::vec3(cosf(counter)
         //                        , cosf(counter), cosf(counter))); //scale up and down
 

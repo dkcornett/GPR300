@@ -12,41 +12,41 @@ const int WINDOW_H = 600;
 
 int main()
 {
-    Display testDisplay(WINDOW_W, WINDOW_H, "Linux OpenGL Demo");
-    Vertex testVertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0), glm::vec2(0.0, 0.0))
-                           , Vertex(glm::vec3(0, 0.5, 0), glm::vec2(0.5, 1.0))
-                           , Vertex(glm::vec3(0.5, -0.5, 0), glm::vec2(1.0, 0.0)), };
+    //Create Display
+    Display display(WINDOW_W, WINDOW_H, "Linux OpenGL Demo");
 
-    unsigned index[] = { 0, 1, 2};
+    //Load in resources from files
+    Mesh mesh("modelFolder/monkey3.obj");
+    Shader shader("shaderFolder/basicShader");
+    Texture texture("textureFolder/bricks.jpg");
 
-    Mesh testMesh(testVertices, sizeof(testVertices) / sizeof(testVertices[0])
-                , index, sizeof(index) / sizeof(index[0]));
-    Mesh testMesh2("modelFolder/monkey3.obj");
-    Shader testShader("shaderFolder/basicShader");
-    Texture testTexture("textureFolder/bricks.jpg");
-    Camera testCamera(glm::vec3(0, 0, -7), 70.0f
-                      , (float)WINDOW_W / (float)WINDOW_H, 0.01f, 1000.0f);
-    Transformation testTransform;
+    //Create the camera and transform
+    Camera cam(glm::vec3(0, 0, -7), 70.0f
+            , (float)WINDOW_W / (float)WINDOW_H, 0.01f, 1000.0f);
+    Transformation Transform;
 
+    //Rendering Loop
     float counter = 0.0f;
-
-    while (!testDisplay.isClosed())
+    while (!display.isClosed())
     {
-        testDisplay.clearDisplay(0.0, 0.0, 1.0, 1.0);
+        //Clear the display
+        display.clearDisplay(0.0, 0.0, 1.0, 1.0);
 
-        testTransform.getPos().x = sinf(counter) * 2.5; //move left and right
-        testTransform.getPos().z = cosf(counter) * 2.5; //move closer and farther from cam
-        testTransform.getRot().x = counter * 2.5; //rotate x
-        testTransform.getRot().y = counter * 2.5; //rotate y
-        testTransform.getRot().z = counter * 2.5; //rotate z
-        //testTransform.setScale(glm::vec3(cosf(counter)
-        //                        , cosf(counter), cosf(counter))); //scale up and down
+        //Animate the model
+        Transform.getPos().x = sinf(counter) * 2.5; //move left and right
+        Transform.getPos().z = cosf(counter) * 2.5; //move closer and farther from cam
+        Transform.getRot().x = counter * 2.5; //rotate x
+        Transform.getRot().y = counter * 2.5; //rotate y
+        Transform.getRot().z = counter * 2.5; //rotate z
 
-        testShader.Bind();
-        testTexture.BindTexture(0);
-        testShader.UpdateShader(testTransform, testCamera);
-        testMesh2.drawMesh();
-        testDisplay.updateDisplay();
+        //Bind the shader and texture
+        shader.Bind();
+        texture.BindTexture(0);
+
+        //Update and draw
+        shader.UpdateShader(Transform, cam);
+        mesh.drawMesh();
+        display.updateDisplay();
         counter += 0.0015f;
     }
 

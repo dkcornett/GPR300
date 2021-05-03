@@ -16,7 +16,7 @@ int main()
     Display display(WINDOW_W, WINDOW_H, "Linux OpenGL Demo");
 
     //Load in resources from files
-    Mesh mesh("modelFolder/monkey3.obj");
+    Mesh mesh("monkey3.obj");
     Shader shader("shaderFolder/basicShader");
     Texture texture("textureFolder/bricks.jpg");
 

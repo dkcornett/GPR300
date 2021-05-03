@@ -45,8 +45,8 @@ void Mesh::InitMesh(const IndexedModel& model)
 
     //Texcoord Buffer
     glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer[TEXCOORD_VB]);
-    glBufferData(GL_ARRAY_BUFFER, model.positions.size()
-                * sizeof(model.texCoords[0])
+    glBufferData(GL_ARRAY_BUFFER, sizeof(model.texCoords[0])
+                * model.texCoords.size()
                 , &model.texCoords[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);

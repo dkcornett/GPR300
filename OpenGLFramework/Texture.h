@@ -10,10 +10,10 @@
 class Texture
 {
     public:
-        Texture(const std::string filename);
+        Texture(const std::string& filename);
         virtual ~Texture();
 
-        void BindTexture(int texUnit);
+        void BindTexture(unsigned texUnit);
 
     private:
         Texture(const Texture& other) {};

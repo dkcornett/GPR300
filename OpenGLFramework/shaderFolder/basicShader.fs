@@ -14,8 +14,8 @@ void main()
 //http://www.lighthouse3d.com/tutorials/glsl-12-tutorial/simple-texture/
 
 
-  vec4 texColors = texture2D(textureSampler, vTexcoord);
   vec3 lightDir = vec3(0, 0, 1);
   //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  gl_FragColor = texColors * clamp(dot(-lightDir, vNormal), 0.0, 1.0);
+  gl_FragColor = texture2D(textureSampler, vTexcoord)
+                * clamp(dot(-lightDir, vNormal), 0.0, 1.0);
 }

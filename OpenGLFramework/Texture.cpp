@@ -1,14 +1,14 @@
 #include "Texture.h"
 
-Texture::Texture(const std::string filename)
+Texture::Texture(const std::string& filename)
 {
-    int imageW;         //unsigned imageW;
-    int imageH;         //unsigned imageH;
-    int numImageComp;   //unsigned numImageComp;
+    int imageW;
+    int imageH;
+    int numImageComp;
     unsigned char* imageData = stbi_load(filename.c_str(), &imageW, &imageH
                                 , &numImageComp, 4); //begin
 
-    if (imageData)
+    if (imageData == NULL)
     {
         std::cerr << "Error: Texture " << filename << " failed to load!\n";
     }
@@ -24,8 +24,8 @@ Texture::Texture(const std::string filename)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     //Control interpolating and extrapolating the texture
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
     //Create Texture image
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageW, imageH, 0
@@ -38,7 +38,7 @@ Texture::~Texture()
     glDeleteTextures(1, &mTexture);
 }
 
-void Texture::BindTexture(int texUnit)
+void Texture::BindTexture(unsigned texUnit)
 {
     //Range is 0 to 31, make sure we aren't outside
     assert(texUnit >= 0 && texUnit <= 31);
